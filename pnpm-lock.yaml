@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@angular/animations':
     specifier: ^16.1.0
@@ -29,6 +25,9 @@ dependencies:
   '@angular/router':
     specifier: ^16.1.0
     version: 16.2.4(@angular/common@16.2.4)(@angular/core@16.2.4)(@angular/platform-browser@16.2.4)(rxjs@7.8.1)
+  bootstrap:
+    specifier: 5.3.1
+    version: 5.3.1(@popperjs/core@2.11.8)
   rxjs:
     specifier: ~7.8.0
     version: 7.8.1
@@ -2120,6 +2119,10 @@ packages:
     dev: true
     optional: true
 
+  /@popperjs/core@2.11.8:
+    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
+
   /@schematics/angular@16.1.8:
     resolution: {integrity: sha512-gTHy1A/E9BCr0sj3VCr6eBYkgVkO96QWiZcFumedGnvstvp5wiCoIoJPLLfYaxVt1vt08xmnmS3OZ3r0qCLdpA==}
     engines: {node: ^16.14.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
@@ -2863,6 +2866,14 @@ packages:
   /boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
     dev: true
+
+  /bootstrap@5.3.1(@popperjs/core@2.11.8):
+    resolution: {integrity: sha512-jzwza3Yagduci2x0rr9MeFSORjcHpt0lRZukZPZQJT1Dth5qzV7XcgGqYzi39KGAVYR8QEDVoO0ubFKOxzMG+g==}
+    peerDependencies:
+      '@popperjs/core': ^2.11.8
+    dependencies:
+      '@popperjs/core': 2.11.8
+    dev: false
 
   /brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -7282,3 +7293,7 @@ packages:
     resolution: {integrity: sha512-+bIeDAFEBYuXRuU3qGQvzdPap+N1zjM4KkBAiiQuVVCrHrhjDuY6VkUhNa5+U27+9w0q3fbKiMCbpJ0XzMmSWA==}
     dependencies:
       tslib: 2.6.2
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
