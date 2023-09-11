@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 
+import { InputErrorDirective } from './directives/input-error.directive';
+
 @NgModule({
-  declarations: [],
+  declarations: [InputErrorDirective],
+  exports: [InputErrorDirective],
 })
 export class SharedModule {}
