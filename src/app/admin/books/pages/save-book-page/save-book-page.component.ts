@@ -15,13 +15,17 @@ export class SaveBookPageComponent {
     slug: ['', [Validators.required, Validators.pattern('[a-z0-9-]+')]],
     description: ['', [Validators.required]],
     price: ['', [Validators.required, Validators.min(0)]],
-    coverPath: ['', [Validators.required]],
-    filePath: ['', [Validators.required]],
+    category: [],
+    coverPath: ['' /* [Validators.required] */],
+    filePath: ['' /* [Validators.required] */],
   });
 
   constructor(private fb: FormBuilder) {}
 
   onSubmit() {
+    if (this.saveBookForm.invalid) return this.saveBookForm.markAllAsTouched();
+
     console.log(this.saveBookForm.value);
+    return;
   }
 }
