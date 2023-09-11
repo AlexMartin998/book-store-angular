@@ -13,7 +13,7 @@ export class BookListPageComponent implements OnInit {
   constructor(private readonly homeService: HomeService) {}
 
   ngOnInit(): void {
-    this.homeService.getBooks(0, 5).subscribe((bookPage) => {
+    this.homeService.getBooks(0, 10).subscribe((bookPage) => {
       this.books = bookPage.books;
       console.log(this.books);
     });
