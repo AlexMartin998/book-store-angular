@@ -7,7 +7,7 @@ import { BookPage } from '../shared/interfaces';
 @Injectable({
   providedIn: 'root',
 })
-export class HomeServiceService {
+export class HomeService {
   constructor(private http: HttpClient) {}
 
   getBooks(page: number, size: number): Observable<BookPage> {
