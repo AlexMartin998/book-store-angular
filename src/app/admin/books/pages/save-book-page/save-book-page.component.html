@@ -9,7 +9,11 @@
         <mat-label>Title</mat-label>
         <input matInput type="text" formControlName="title" />
         <mat-error>
-          <span>Errir</span>
+          <span
+            inputError
+            inputName="Title"
+            [errors]="saveBookForm.get('title')?.errors"
+          ></span>
         </mat-error>
       </mat-form-field>
 
