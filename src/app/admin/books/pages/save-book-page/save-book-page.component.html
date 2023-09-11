@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-12 col-sm-8">
     <div>
-      <form [formGroup]="saveBookForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="mb-1 w-100">
           <mat-label>Title</mat-label>
           <input matInput type="text" formControlName="title" />
@@ -11,7 +11,7 @@
             <span
               inputError
               inputName="Title"
-              [errors]="saveBookForm.get('title')?.errors"
+              [errors]="bookForm.get('title')?.errors"
             ></span>
           </mat-error>
         </mat-form-field>
@@ -23,7 +23,7 @@
             <span
               inputError
               inputName="Slug"
-              [errors]="saveBookForm.get('slug')?.errors"
+              [errors]="bookForm.get('slug')?.errors"
             ></span>
           </mat-error>
         </mat-form-field>
@@ -35,7 +35,7 @@
             <span
               inputError
               inputName="Description"
-              [errors]="saveBookForm.get('description')?.errors"
+              [errors]="bookForm.get('description')?.errors"
             ></span>
           </mat-error>
         </mat-form-field>
@@ -54,7 +54,7 @@
             ><span
               inputError
               inputName="Price"
-              [errors]="saveBookForm.get('price')?.errors"
+              [errors]="bookForm.get('price')?.errors"
             ></span
           ></mat-error>
         </mat-form-field>
@@ -73,7 +73,7 @@
             ><span
               inputError
               inputName="Category"
-              [errors]="saveBookForm.get('categoryId')?.errors"
+              [errors]="bookForm.get('categoryId')?.errors"
             ></span
           ></mat-error>
         </mat-form-field>

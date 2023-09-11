@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Category } from 'src/app/admin/shared/interfaces';
+import { Router } from '@angular/router';
+import { Book, Category } from 'src/app/admin/shared/interfaces';
 import { BooksService } from '../../services/books.service';
 
 @Component({
@@ -12,23 +13,28 @@ import { BooksService } from '../../services/books.service';
 export class SaveBookPageComponent implements OnInit {
   public categories: Category[] = [];
 
-  public saveBookForm: FormGroup = this.fb.group({
+  public bookForm: FormGroup = this.fb.group({
     title: [
-      '',
+      'asssssssss',
       [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
     ],
-    slug: ['', [Validators.required, Validators.pattern('[a-z0-9-]+')]],
-    description: ['', [Validators.required]],
-    price: ['', [Validators.required, Validators.min(0)]],
-    categoryId: ['', [Validators.required, Validators.min(1)]],
+    slug: ['asa', [Validators.required, Validators.pattern('[a-z0-9-]+')]],
+    description: ['asasa', [Validators.required]],
+    price: ['12', [Validators.required, Validators.min(0)]],
+    categoryId: ['1', [Validators.required, Validators.min(1)]],
     coverPath: ['' /* [Validators.required] */],
     filePath: ['' /* [Validators.required] */],
   });
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private readonly booksService: BooksService
   ) {}
+
+  get currentBook(): Book {
+    return this.bookForm.value as Book;
+  }
 
   ngOnInit(): void {
     this.booksService.getCategories().subscribe((categories) => {
@@ -37,9 +43,13 @@ export class SaveBookPageComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.saveBookForm.invalid) return this.saveBookForm.markAllAsTouched();
+    if (this.bookForm.invalid) return this.bookForm.markAllAsTouched();
 
-    console.log(this.saveBookForm.value);
+    this.booksService.create(this.currentBook).subscribe((hero) => {
+      console.log(hero);
+      // this.router.navigateByUrl('/admin/books');
+    });
+
     return;
   }
 }
