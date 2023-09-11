@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Category } from 'src/app/admin/shared/interfaces';
+import { BooksService } from '../../services/books.service';
 
 @Component({
   selector: 'admin-save-book-page',
   templateUrl: './save-book-page.component.html',
   styles: [],
 })
-export class SaveBookPageComponent {
+export class SaveBookPageComponent implements OnInit {
+  public categories: Category[] = [];
+
   public saveBookForm: FormGroup = this.fb.group({
     title: [
       '',
@@ -15,12 +20,21 @@ export class SaveBookPageComponent {
     slug: ['', [Validators.required, Validators.pattern('[a-z0-9-]+')]],
     description: ['', [Validators.required]],
     price: ['', [Validators.required, Validators.min(0)]],
-    category: [],
+    categoryId: ['', [Validators.required, Validators.min(1)]],
     coverPath: ['' /* [Validators.required] */],
     filePath: ['' /* [Validators.required] */],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private readonly booksService: BooksService
+  ) {}
+
+  ngOnInit(): void {
+    this.booksService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
   onSubmit() {
     if (this.saveBookForm.invalid) return this.saveBookForm.markAllAsTouched();

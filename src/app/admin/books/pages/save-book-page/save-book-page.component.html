@@ -62,9 +62,20 @@
         <!-- selector lleva el formControlName -->
         <mat-form-field appearance="outline" class="col-12">
           <mat-label>Category</mat-label>
-          <mat-select required formControlName="category">
-            <mat-option> </mat-option>
+          <mat-select required formControlName="categoryId">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category.id"
+              >{{ category.name }}
+            </mat-option>
           </mat-select>
+          <mat-error
+            ><span
+              inputError
+              inputName="Category"
+              [errors]="saveBookForm.get('categoryId')?.errors"
+            ></span
+          ></mat-error>
         </mat-form-field>
       </form>
 
