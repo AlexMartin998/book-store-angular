@@ -20,6 +20,10 @@ export class BooksService {
     return this.http.post<Book>(`${this.baseUrl}/books`, book);
   }
 
+  update(book: Book): Observable<Book> {
+    return this.http.patch<Book>(`${this.baseUrl}/books/${book.id}`, book);
+  }
+
   findAll(size: number = 10, page: number = 0): Observable<BookPage> {
     const params = new HttpParams().set('page', page).set('size', size);
 

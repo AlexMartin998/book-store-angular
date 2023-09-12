@@ -15,6 +15,7 @@ export class SaveBookPageComponent implements OnInit {
   public categories: Category[] = [];
 
   public bookForm: FormGroup = this.fb.group({
+    id: [''],
     title: [
       '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
@@ -49,12 +50,15 @@ export class SaveBookPageComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         switchMap(({ slug }) => this.booksService.findOneBySlug(slug)),
-        map((hero) => {
-          return { ...hero, categoryId: hero.category?.id };
+        map((book) => {
+          return { ...book, categoryId: book.category?.id };
         })
       )
       .subscribe({
-        next: (hero) => this.bookForm.reset(hero),
+        next: (book) => {
+          console.log(book);
+          this.bookForm.reset(book);
+        },
         error: (errorMessage) => {
           console.log(errorMessage);
           return this.router.navigateByUrl('/admin/books');
@@ -65,9 +69,15 @@ export class SaveBookPageComponent implements OnInit {
   onSubmit() {
     if (this.bookForm.invalid) return this.bookForm.markAllAsTouched();
 
+    // update
+    if (this.currentBook?.id) {
+      return this.booksService.update(this.currentBook).subscribe((hero) => {
+        // mostrar snackbar
+      });
+    }
+
     this.booksService.create(this.currentBook).subscribe((hero) => {
-      console.log(hero);
-      // this.router.navigateByUrl('/admin/books');
+      this.router.navigateByUrl('/admin/books');
     });
 
     return;
