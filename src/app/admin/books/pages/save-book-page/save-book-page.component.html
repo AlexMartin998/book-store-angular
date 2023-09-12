@@ -5,6 +5,7 @@
     <div>
       <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="mb-1 w-100">
+          <!-- Title -->
           <mat-label>Title</mat-label>
           <input
             matInput
@@ -21,6 +22,7 @@
           </mat-error>
         </mat-form-field>
 
+        <!-- Slug -->
         <mat-form-field appearance="outline" class="mb-1 w-100">
           <mat-label>Slug</mat-label>
           <input matInput type="text" formControlName="slug" />
@@ -33,6 +35,7 @@
           </mat-error>
         </mat-form-field>
 
+        <!-- Description -->
         <mat-form-field appearance="outline" class="mb-1 w-100">
           <mat-label>Description</mat-label>
           <input matInput type="text" formControlName="description" />
@@ -45,6 +48,7 @@
           </mat-error>
         </mat-form-field>
 
+        <!-- Price -->
         <mat-form-field appearance="outline" class="mb-1 w-100">
           <mat-label>Price</mat-label>
           <input
@@ -64,8 +68,8 @@
           ></mat-error>
         </mat-form-field>
 
-        <!-- selector lleva el formControlName -->
-        <mat-form-field appearance="outline" class="col-12">
+        <!-- Category -->
+        <mat-form-field appearance="outline" class="col-12 mb-3">
           <mat-label>Category</mat-label>
           <mat-select required formControlName="categoryId">
             <mat-option
@@ -82,9 +86,41 @@
             ></span
           ></mat-error>
         </mat-form-field>
+
+        <!-- Book cover -->
+        <div class="mb-3">
+          <label class="d-block mb-2">Book Cover</label>
+
+          <button
+            type="button"
+            mat-raised-button
+            (click)="coverInputFile.click()"
+          >
+            Upload File
+          </button>
+
+          <mat-error *ngIf="bookForm.controls['coverPath'].touched">
+            <span
+              inputError
+              inputName="Book Cover"
+              [errors]="bookForm.get('coverPath')?.errors"
+            ></span>
+          </mat-error>
+
+          <input
+            type="file"
+            #coverInputFile
+            (change)="uploadFile($event, 'coverPath')"
+            class="d-none"
+            accept="image/*"
+          />
+
+          <div *ngIf="bookForm.controls['coverPath'].valid">sss</div>
+        </div>
       </form>
 
-      <div class="text-end">
+      <!-- Action buttons -->
+      <div class="text-end mt-5">
         <button mat-button routerLink="/admin/books">Cancelar</button>
         <button
           mat-raised-button
