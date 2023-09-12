@@ -1,3 +1,51 @@
-<div class="py-5 container">
-  <router-outlet />
-</div>
+<mat-sidenav-container fullscreen>
+  <!-- sidebar -->
+  <mat-sidenav #sidenav [ngStyle]="{ width: '250px' }">
+    <mat-toolbar>
+      <span>Manu</span>
+
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let item of sidebarItems"
+        [routerLink]="item.url"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon> {{ item.label }}
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- navbar -->
+  <mat-toolbar class="d-flex align-items-center">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <div class="mt-2 mx-4">
+      <div
+        [matMenuTriggerFor]="menu"
+        class="d-flex align-items-center gap-2 pointer"
+      >
+        <img src="/assets/avatar.png" alt="Avatar" class="avatar" />
+        <div>
+          <h3 class="avatar-title">Admin</h3>
+        </div>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Log Out</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+
+  <div class="py-5 container">
+    <router-outlet />
+  </div>
+</mat-sidenav-container>
