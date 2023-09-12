@@ -37,4 +37,10 @@ export class BooksService {
       .get<Book>(`${this.baseUrl}/books/slug/${slug}`)
       .pipe(catchError((err) => throwError(() => err?.error?.message)));
   }
+
+  checkSlugAvailability(slug: string): Observable<boolean> {
+    return this.http.get<boolean>(
+      `${this.baseUrl}/books/availability/slug/${slug}`
+    );
+  }
 }

@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
 
+import { of } from 'rxjs';
 import { Book, Category } from 'src/app/admin/shared/interfaces';
 import { BooksService } from '../../services/books.service';
 
@@ -28,6 +35,9 @@ export class SaveBookPageComponent implements OnInit {
     filePath: ['' /* [Validators.required] */],
   });
 
+  private slugChanged: boolean = false;
+  private originalSlug?: string;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -51,6 +61,7 @@ export class SaveBookPageComponent implements OnInit {
       .pipe(
         switchMap(({ slug }) => this.booksService.findOneBySlug(slug)),
         map((book) => {
+          this.originalSlug = book.slug; // allow to return to original title
           return { ...book, categoryId: book.category?.id };
         })
       )
@@ -62,6 +73,29 @@ export class SaveBookPageComponent implements OnInit {
           console.log(errorMessage);
           return this.router.navigateByUrl('/admin/books');
         },
+      });
+
+    // // Debounce
+    const titleControl = this.bookForm.controls['slug'];
+
+    titleControl.valueChanges
+      .pipe(
+        debounceTime(540),
+        distinctUntilChanged(), //
+        tap(() => (this.slugChanged = true)),
+        switchMap((slug) => {
+          if (!this.slugChanged || slug === this.originalSlug || !slug)
+            return of(null);
+
+          return this.booksService.checkSlugAvailability(slug);
+        })
+      )
+      .subscribe((alreadyTaken) => {
+        if (!alreadyTaken) return;
+
+        const slugControl = this.bookForm.get('slug');
+        slugControl?.setErrors({ slugNotAvailable: true });
+        slugControl?.markAsTouched();
       });
   }
 
