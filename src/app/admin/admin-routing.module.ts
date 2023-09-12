@@ -19,7 +19,7 @@ const routes: Routes = [
             component: SaveBookPageComponent,
           },
           {
-            path: 'edit/:id',
+            path: 'edit/:slug',
             component: SaveBookPageComponent,
           },
         ],

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 import { Book, Category } from '../../shared/interfaces';
 
@@ -18,5 +18,11 @@ export class BooksService {
 
   create(book: Book): Observable<Book> {
     return this.http.post<Book>(`${this.baseUrl}/books`, book);
+  }
+
+  findOneBySlug(slug: string): Observable<Book> {
+    return this.http
+      .get<Book>(`${this.baseUrl}/books/slug/${slug}`)
+      .pipe(catchError((err) => throwError(() => err?.error?.message)));
   }
 }
