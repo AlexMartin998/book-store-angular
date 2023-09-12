@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 
-import { Book, Category } from '../../shared/interfaces';
+import { Book, BookPage, Category } from '../../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +18,14 @@ export class BooksService {
 
   create(book: Book): Observable<Book> {
     return this.http.post<Book>(`${this.baseUrl}/books`, book);
+  }
+
+  findAll(size: number = 10, page: number = 0): Observable<BookPage> {
+    const params = new HttpParams().set('page', page).set('size', size);
+
+    return this.http.get<BookPage>(`${this.baseUrl}/books`, {
+      params,
+    });
   }
 
   findOneBySlug(slug: string): Observable<Book> {
