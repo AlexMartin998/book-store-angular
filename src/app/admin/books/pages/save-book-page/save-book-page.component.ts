@@ -56,7 +56,6 @@ export class SaveBookPageComponent implements OnInit {
       )
       .subscribe({
         next: (book) => {
-          console.log(book);
           this.bookForm.reset(book);
         },
         error: (errorMessage) => {
@@ -72,7 +71,9 @@ export class SaveBookPageComponent implements OnInit {
     // update
     if (this.currentBook?.id) {
       return this.booksService.update(this.currentBook).subscribe((hero) => {
-        // mostrar snackbar
+        // show snackbar
+
+        this.router.navigateByUrl('/admin/books');
       });
     }
 

@@ -1,4 +1,4 @@
-<h1 class="mb-5">New Book</h1>
+<h1 class="mb-5">{{ currentBook.id ? "Update" : "New" }} Book</h1>
 
 <div class="row">
   <div class="col-12 col-sm-8">
@@ -92,7 +92,7 @@
           (click)="onSubmit()"
           class="ms-2"
         >
-          Create Book
+          {{ currentBook.id ? "Update" : "New" }} Book
         </button>
       </div>
     </div>
