@@ -18,7 +18,18 @@
     <ng-component matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Book</th>
       <td mat-cell *matCellDef="let book">
-        {{ book.title }}
+        <div class="d-flex gap-2 align-items-center">
+          <img
+            [src]="book.coverPath | safeImage"
+            [alt]="book.title"
+            class="book-image"
+          />
+
+          <div>
+            <div class="fw-medium">{{ book.title }}</div>
+            <p>{{ book.desc }}</p>
+          </div>
+        </div>
       </td>
     </ng-component>
 

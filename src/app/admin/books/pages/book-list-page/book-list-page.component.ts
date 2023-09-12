@@ -22,7 +22,7 @@ export class BookListPageComponent implements OnInit {
   constructor(private readonly booksService: BooksService) {}
 
   ngOnInit(): void {
-    this.booksService.findAll(10, 0).subscribe((bookPage) => {
+    this.booksService.findAll(5, 0).subscribe((bookPage) => {
       this.bookPage = bookPage;
     });
   }
