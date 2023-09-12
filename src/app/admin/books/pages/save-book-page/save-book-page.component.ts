@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, switchMap } from 'rxjs';
 
-import { Router } from '@angular/router';
 import { Book, Category } from 'src/app/admin/shared/interfaces';
 import { BooksService } from '../../services/books.service';
 
@@ -15,13 +16,13 @@ export class SaveBookPageComponent implements OnInit {
 
   public bookForm: FormGroup = this.fb.group({
     title: [
-      'asssssssss',
+      '',
       [Validators.required, Validators.minLength(3), Validators.maxLength(100)],
     ],
-    slug: ['asa', [Validators.required, Validators.pattern('[a-z0-9-]+')]],
-    description: ['asasa', [Validators.required]],
-    price: ['12', [Validators.required, Validators.min(0)]],
-    categoryId: ['1', [Validators.required, Validators.min(1)]],
+    slug: ['', [Validators.required, Validators.pattern('[a-z0-9-]+')]],
+    description: ['', [Validators.required]],
+    price: ['', [Validators.required, Validators.min(0)]],
+    categoryId: ['', [Validators.required, Validators.min(1)]],
     coverPath: ['' /* [Validators.required] */],
     filePath: ['' /* [Validators.required] */],
   });
@@ -29,6 +30,7 @@ export class SaveBookPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private readonly booksService: BooksService
   ) {}
 
@@ -37,9 +39,27 @@ export class SaveBookPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // get categories
     this.booksService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
+
+    // edit
+    if (!this.router.url.includes('edit')) return;
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({ slug }) => this.booksService.findOneBySlug(slug)),
+        map((hero) => {
+          return { ...hero, categoryId: hero.category?.id };
+        })
+      )
+      .subscribe({
+        next: (hero) => this.bookForm.reset(hero),
+        error: (errorMessage) => {
+          console.log(errorMessage);
+          return this.router.navigateByUrl('/admin/books');
+        },
+      });
   }
 
   onSubmit() {
