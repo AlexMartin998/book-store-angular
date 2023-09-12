@@ -6,7 +6,12 @@
       <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="mb-1 w-100">
           <mat-label>Title</mat-label>
-          <input matInput type="text" formControlName="title" />
+          <input
+            matInput
+            (keyup)="createSlug()"
+            type="text"
+            formControlName="title"
+          />
           <mat-error>
             <span
               inputError

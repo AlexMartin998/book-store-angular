@@ -82,4 +82,15 @@ export class SaveBookPageComponent implements OnInit {
 
     return;
   }
+
+  createSlug() {
+    const title: string = this.bookForm.controls['title'].value;
+    const slug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9-]+/g, '-') // Replace invalid characters with -
+      .replace(/^-+|-+$/g, '') // Removes hyphens at the beginning or at the end
+      .replace(/-+/g, '-'); // Replaces multiple - with a single -
+
+    this.bookForm.controls['slug'].setValue(slug);
+  }
 }

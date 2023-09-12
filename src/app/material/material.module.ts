@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -24,12 +25,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatInputModule,
     MatMenuModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatSelectModule,
   ],
 })
 export class MaterialModule {}
