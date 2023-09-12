@@ -12,7 +12,7 @@
   </button>
 </div>
 
-<div *ngIf="books && books.length; else loading" class="admin-table mt-3">
+<div *ngIf="books; else loading" class="admin-table mt-3">
   <table mat-table [dataSource]="books">
     <!-- Title -->
     <ng-component matColumnDef="title">

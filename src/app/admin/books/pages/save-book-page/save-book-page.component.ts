@@ -16,7 +16,7 @@ import { BooksService } from '../../services/books.service';
 @Component({
   selector: 'admin-save-book-page',
   templateUrl: './save-book-page.component.html',
-  styles: [],
+  styleUrls: ['./save-book-page.component.css'],
 })
 export class SaveBookPageComponent implements OnInit {
   public categories: Category[] = [];

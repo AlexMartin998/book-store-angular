@@ -176,9 +176,12 @@
   </div>
 
   <div class="col-12 col-sm-4">
-    <mat-card>
-      <!-- Img -->
-      IMAGE
-    </mat-card>
+    <div>
+      <img
+        [src]="currentBook.coverPath | safeImage"
+        [alt]="currentBook.title"
+        class="w-100 h-100 book-image"
+      />
+    </div>
   </div>
 </div>
