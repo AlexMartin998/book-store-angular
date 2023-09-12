@@ -87,35 +87,76 @@
           ></mat-error>
         </mat-form-field>
 
-        <!-- Book cover -->
-        <div class="mb-3">
-          <label class="d-block mb-2">Book Cover</label>
+        <!-- Files -->
+        <div class="d-md-flex justify-content-between">
+          <!-- Book cover -->
+          <div class="mb-3">
+            <label class="d-block mb-2">Book Cover</label>
 
-          <button
-            type="button"
-            mat-raised-button
-            (click)="coverInputFile.click()"
-          >
-            Upload File
-          </button>
+            <button
+              type="button"
+              mat-raised-button
+              (click)="coverInputFile.click()"
+              class="mb-3"
+            >
+              Upload File
+            </button>
 
-          <mat-error *ngIf="bookForm.controls['coverPath'].touched">
-            <span
-              inputError
-              inputName="Book Cover"
-              [errors]="bookForm.get('coverPath')?.errors"
-            ></span>
-          </mat-error>
+            <mat-error *ngIf="bookForm.controls['coverPath'].touched">
+              <span
+                inputError
+                inputName="Book Cover"
+                [errors]="bookForm.get('coverPath')?.errors"
+              ></span>
+            </mat-error>
 
-          <input
-            type="file"
-            #coverInputFile
-            (change)="uploadFile($event, 'coverPath')"
-            class="d-none"
-            accept="image/*"
-          />
+            <input
+              type="file"
+              #coverInputFile
+              (change)="uploadFile($event, 'coverPath')"
+              class="d-none"
+              accept="image/*"
+            />
 
-          <div *ngIf="bookForm.controls['coverPath'].valid">sss</div>
+            <div *ngIf="bookForm.controls['coverPath'].valid">
+              {{ coverInputFile.files?.item(0)?.name }} was successfully
+              uploaded
+            </div>
+          </div>
+
+          <!-- PDF -->
+          <div class="mb-3">
+            <label class="d-block mb-2">PDF File</label>
+
+            <button
+              type="button"
+              mat-raised-button
+              (click)="pdfFile.click()"
+              class="mb-3"
+            >
+              Upload File
+            </button>
+
+            <mat-error *ngIf="bookForm.controls['filePath'].touched">
+              <span
+                inputError
+                inputName="PDF file"
+                [errors]="bookForm.get('filePath')?.errors"
+              ></span>
+            </mat-error>
+
+            <input
+              type="file"
+              #pdfFile
+              (change)="uploadFile($event, 'filePath')"
+              class="d-none"
+              accept="application/pdf"
+            />
+
+            <div *ngIf="bookForm.controls['filePath'].valid">
+              {{ pdfFile.files?.item(0)?.name }} was successfully uploaded
+            </div>
+          </div>
         </div>
       </form>
 

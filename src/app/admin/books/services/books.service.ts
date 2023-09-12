@@ -2,7 +2,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 
-import { Book, BookPage, Category } from '../../shared/interfaces';
+import {
+  Book,
+  BookPage,
+  Category,
+  FileResponse,
+} from '../../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +46,13 @@ export class BooksService {
   checkSlugAvailability(slug: string): Observable<boolean> {
     return this.http.get<boolean>(
       `${this.baseUrl}/books/availability/slug/${slug}`
+    );
+  }
+
+  uploadFile(formData: FormData): Observable<FileResponse> {
+    return this.http.post<FileResponse>(
+      `${this.baseUrl}/media/upload`,
+      formData
     );
   }
 }

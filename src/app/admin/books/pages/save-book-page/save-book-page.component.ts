@@ -31,10 +31,11 @@ export class SaveBookPageComponent implements OnInit {
     description: ['', [Validators.required]],
     price: ['', [Validators.required, Validators.min(0)]],
     categoryId: ['', [Validators.required, Validators.min(1)]],
-    coverPath: ['' /* [Validators.required] */],
-    filePath: ['' /* [Validators.required] */],
+    coverPath: ['', [Validators.required]],
+    filePath: ['', [Validators.required]],
   });
 
+  // // Debounce
   private slugChanged: boolean = false;
   private originalSlug?: string;
 
@@ -81,7 +82,7 @@ export class SaveBookPageComponent implements OnInit {
     titleControl.valueChanges
       .pipe(
         debounceTime(540),
-        distinctUntilChanged(), //
+        distinctUntilChanged(), // prevent duplicate or consecutive values from being issued from the observable
         tap(() => (this.slugChanged = true)),
         switchMap((slug) => {
           if (!this.slugChanged || slug === this.originalSlug || !slug)
@@ -127,5 +128,21 @@ export class SaveBookPageComponent implements OnInit {
       .replace(/-+/g, '-'); // Replaces multiple - with a single -
 
     this.bookForm.controls['slug'].setValue(slug);
+  }
+
+  uploadFile(event: any, control: string) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      console.log(`${file.name} was successfully uploaded`);
+
+      this.booksService.uploadFile(formData).subscribe((res) => {
+        // set filename as input value
+        this.bookForm.controls[control].setValue(res.filename);
+      });
+    }
   }
 }
