@@ -7,4 +7,6 @@ export interface BookPage {
   totalElements: number;
   totalPages: number;
   lastOne: boolean;
+  createdAt: string;
+  updatedAt?: string;
 }
