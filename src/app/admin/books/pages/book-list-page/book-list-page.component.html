@@ -1,1 +1,82 @@
-<p>book-list-page works!</p>
+<h1>Book List</h1>
+
+<ng-template #loading></ng-template>
+
+<div class="text-end mt-5">
+  <button mat-raised-button color="primary" routerLink="/admin/books/new">
+    Add Book
+  </button>
+</div>
+
+<div *ngIf="books && books.length; else loading" class="admin-table mt-3">
+  <table mat-table [dataSource]="books">
+    <!-- Title -->
+    <ng-component matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Book</th>
+      <td mat-cell *matCellDef="let book">
+        {{ book.title }}
+      </td>
+    </ng-component>
+
+    <!-- Price -->
+    <ng-component matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let book">
+        {{ book.price | currency }}
+      </td>
+    </ng-component>
+
+    <!-- Created at -->
+    <ng-component matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Created At</th>
+      <td mat-cell *matCellDef="let book">
+        {{ book.createdAt | date : "dd/MM/yyyy" }}
+      </td>
+    </ng-component>
+
+    <!-- Status -->
+    <ng-component matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let book">
+        {{ book.active ? "Active" : "Inactive" }}
+      </td>
+    </ng-component>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let book" class="text-end">
+        <button
+          mat-icon-button
+          [routerLink]="['/admin/books/edit', book.slug]"
+          color="primary"
+          matTooltip="Edit book"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="ms-2"
+          color="warn"
+          matTooltip="Delete book"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- pagination -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+    [length]="bookPage!.totalElements"
+    [pageSize]="bookPage!.size"
+    (page)="paginateBooks($event)"
+  >
+  </mat-paginator>
+</div>
