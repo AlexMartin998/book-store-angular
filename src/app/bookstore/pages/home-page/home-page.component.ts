@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HomeService } from '../../services/home.service';
 import { Book } from 'src/app/shared/interfaces';
+import { CartService } from '../../services/cart.service';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,7 +12,10 @@ import { Book } from 'src/app/shared/interfaces';
 export class HomePageComponent implements OnInit {
   private _books: Book[] = [];
 
-  constructor(private readonly homeService: HomeService) {}
+  constructor(
+    private readonly homeService: HomeService,
+    private readonly cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.homeService.getLatestBooks().subscribe((books) => {
@@ -22,4 +26,6 @@ export class HomePageComponent implements OnInit {
   get books() {
     return this._books;
   }
+
+  
 }
