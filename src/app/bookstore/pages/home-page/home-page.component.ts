@@ -18,7 +18,8 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.homeService.getLatestBooks().subscribe((books) => {
+    // books are fetched each time this componets is mounted
+    this.homeService.findLatestBooks().subscribe((books) => {
       this._books = books;
     });
   }
