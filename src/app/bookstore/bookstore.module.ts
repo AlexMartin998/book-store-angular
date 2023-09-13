@@ -11,6 +11,7 @@ import { ShopLayoutComponent } from './layouts/shop-layout/shop-layout.component
 import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-page.component';
 import { BooksPageComponent } from './pages/books-page/books-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { CartPageComponent } from './pages/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     BookCardComponent,
     BookDetailPageComponent,
     BooksPageComponent,
+    CartPageComponent,
   ],
   imports: [
     CommonModule,

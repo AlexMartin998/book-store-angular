@@ -31,7 +31,7 @@
         <mat-nav-list class="cart-menu">
           <mat-list-item
             *ngFor="let item of cartItems"
-            [routerLink]="'/book/' + item.slug"
+            [routerLink]="['/book', item.slug]"
           >
             <div class="d-flex gap-3">
               <img
@@ -49,7 +49,7 @@
             </div>
           </mat-list-item>
           <mat-list-item class="btn-go-cart">
-            <span class="btn-cart-txt"> Go to cart </span>
+            <span class="btn-cart-txt" routerLink="/cart"> Go to cart </span>
           </mat-list-item>
         </mat-nav-list>
       </ng-container>
@@ -58,7 +58,7 @@
     <ng-template #emptyCart>
       <div class="empty-cart">
         <p>Your cart is empty.</p>
-        <span>Keep shopping</span>
+        <span routerLink="/books">Keep shopping</span>
       </div>
     </ng-template>
   </div>

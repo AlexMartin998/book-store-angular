@@ -1,0 +1,25 @@
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-summary-box {
+  border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.16);
+  padding: 32px;
+}
+
+.order-summary-box > h3 {
+  font-size: 20px;
+}
+
+.os-desc {
+  font-size: 16px;
+}
+
+.os-total {
+  font-size: 20px;
+  font-weight: 500;
+}
