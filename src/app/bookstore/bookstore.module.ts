@@ -9,9 +9,10 @@ import { BookCardComponent } from './components/book-card/book-card.component';
 import { ShopLayoutComponent } from './layouts/shop-layout/shop-layout.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-page.component';
+import { BooksPageComponent } from './pages/books-page/books-page.component';
 
 @NgModule({
-  declarations: [HomePageComponent, ShopLayoutComponent, BookCardComponent, BookDetailPageComponent],
+  declarations: [HomePageComponent, ShopLayoutComponent, BookCardComponent, BookDetailPageComponent, BooksPageComponent],
   imports: [CommonModule, BookstoreRoutingModule, SharedModule, MaterialModule],
 })
 export class BookstoreModule {}

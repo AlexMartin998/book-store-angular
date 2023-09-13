@@ -4,6 +4,7 @@ import { ShopLayoutComponent } from './layouts/shop-layout/shop-layout.component
 
 import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { BooksPageComponent } from './pages/books-page/books-page.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     component: ShopLayoutComponent,
     children: [
       { path: '', component: HomePageComponent },
+      { path: 'books', component: BooksPageComponent },
       {
         path: 'book/:slug',
         component: BookDetailPageComponent,
