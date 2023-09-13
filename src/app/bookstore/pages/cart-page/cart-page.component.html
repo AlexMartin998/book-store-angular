@@ -5,7 +5,11 @@
     <!-- Left side-->
     <div class="col-md-6">
       <div *ngIf="items.length; else cartIsEmptyButton">
-        <div *ngFor="let item of items">
+        <div
+          *ngFor="let item of items"
+          [routerLink]="['/book', item.slug]"
+          class="cursor-pointer"
+        >
           <div class="d-flex gap-2 py-2">
             <img [src]="item.coverPath | safeImage" alt="" class="mw-96px" />
 
