@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 import { Book } from 'src/app/shared/interfaces';
 import { BookPage } from '../shared/interfaces';
@@ -23,5 +23,11 @@ export class HomeService {
     return this.http.get<BookPage>(`${this.baseUrl}/home/books`, {
       params,
     });
+  }
+
+  findOneBySlug(slug: string): Observable<Book> {
+    return this.http
+      .get<Book>(`${this.baseUrl}/home/books/${slug}`)
+      .pipe(catchError((err) => throwError(() => err?.error?.message)));
   }
 }

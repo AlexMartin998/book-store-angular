@@ -1,9 +1,16 @@
 <mat-card class="book-card">
   <div>
-    <img mat-card-image [src]="book.coverPath | safeImage" [alt]="book.title" />
+    <img
+      mat-card-image
+      [src]="book.coverPath | safeImage"
+      [alt]="book.title"
+      class="pb-2"
+    />
 
     <mat-card-content class="pb-3">
-      <a class="h4" [routerLink]="['/books', book.slug]">{{ book.title }}</a>
+      <h4 class="pt-3">
+        <a class="h4" [routerLink]="['/book', book.slug]">{{ book.title }}</a>
+      </h4>
       <p>{{ book.description | slice : 0 : 100 }}...</p>
     </mat-card-content>
   </div>
