@@ -1,5 +1,7 @@
 <mat-toolbar class="d-flex align-items-center">
-  <span class="logo-container">Book | <span class="logo-shop">Shop</span></span>
+  <span class="logo-container" routerLink="/"
+    >Book | <span class="logo-shop">Shop</span></span
+  >
 
   <span class="spacer"></span>
 
@@ -27,7 +29,10 @@
       <!-- container to show items -->
       <ng-container *ngIf="cartItems.length; else emptyCart">
         <mat-nav-list class="cart-menu">
-          <mat-list-item *ngFor="let item of cartItems">
+          <mat-list-item
+            *ngFor="let item of cartItems"
+            [routerLink]="'/book/' + item.slug"
+          >
             <div class="d-flex gap-3">
               <img
                 [src]="item.coverPath | safeImage"
@@ -37,11 +42,14 @@
 
               <div>
                 <div class="font-weight-bold">
-                  {{ item.title | slice : 0 : 21 }}...
+                  {{ item.title | slice : 0 : 20 }}...
                 </div>
                 <p>{{ item.price | currency }}</p>
               </div>
             </div>
+          </mat-list-item>
+          <mat-list-item class="btn-go-cart">
+            <span class="btn-cart-txt"> Go to cart </span>
           </mat-list-item>
         </mat-nav-list>
       </ng-container>

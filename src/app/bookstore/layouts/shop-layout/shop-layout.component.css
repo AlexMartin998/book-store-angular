@@ -57,3 +57,17 @@ mat-toolbar {
   color: #3f51b5;
   cursor: pointer;
 }
+
+.btn-go-cart {
+  text-align: center !important;
+  background-color: #3f51b5 !important;
+  margin-top: 15px !important;
+  width: 87% !important;
+  margin: auto;
+  height: 48px !important;
+}
+
+.btn-cart-txt {
+  color: white !important;
+  font-weight: 600;
+}
