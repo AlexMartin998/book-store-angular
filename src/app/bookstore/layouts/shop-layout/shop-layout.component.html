@@ -5,25 +5,72 @@
 
   <div>
     <button mat-button rouerLink="/books" class="ms-3 navs">Books</button>
-    <button mat-button rouerLink="/books" class="ms-3 navs">Categories</button>
+    <button mat-button rouerLink="/categories" class="ms-3 navs">
+      Categories
+    </button>
   </div>
 
   <span class="spacer"></span>
 
-  <div class="mx-4">
-    <div
-      [matMenuTriggerFor]="menu"
-      class="d-flex align-items-center gap-2 pointer"
+  <!-- Cart -->
+  <div>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="cartMenu"
+      [matBadge]="cartItems.length"
+      class="me-2 btn-cart"
     >
-      <img src="/assets/avatar.png" alt="Avatar" class="avatar" />
-      <div>
-        <h3 class="avatar-title">User</h3>
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <mat-menu #cartMenu="matMenu" class="mat-menu-cart">
+      <!-- container to show items -->
+      <ng-container *ngIf="cartItems.length; else emptyCart">
+        <mat-nav-list class="cart-menu">
+          <mat-list-item *ngFor="let item of cartItems">
+            <div class="d-flex gap-3">
+              <img
+                [src]="item.coverPath | safeImage"
+                [alt]="item.title"
+                class="cart-item-img"
+              />
+
+              <div>
+                <div class="font-weight-bold">
+                  {{ item.title | slice : 0 : 21 }}...
+                </div>
+                <p>{{ item.price | currency }}</p>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-nav-list>
+      </ng-container>
+    </mat-menu>
+
+    <ng-template #emptyCart>
+      <div class="empty-cart">
+        <p>Your cart is empty.</p>
+        <span>Keep shopping</span>
       </div>
-    </div>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Log Out</button>
+    </ng-template>
+  </div>
+
+  <!-- User Menu -->
+  <div>
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu">
+      <img src="/assets/avatar.png" alt="Avatar" class="avatar" />
+      <h3 class="avatar-title">User</h3>
+    </button>
+
+    <mat-menu #userMenu="matMenu" class="user-menu">
+      <button mat-menu-item>
+        <mat-icon class="btn-logout-text">logout</mat-icon>
+        <span class="logout-txt">Log Out</span>
+      </button>
     </mat-menu>
   </div>
+
+  <!-- Menu -->
   <button mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>

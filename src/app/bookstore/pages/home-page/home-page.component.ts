@@ -26,6 +26,4 @@ export class HomePageComponent implements OnInit {
   get books() {
     return this._books;
   }
-
-  
 }

@@ -129,4 +129,28 @@ h1 {
   line-height: 1.5;
   font-weight: 700;
   font-size: 0.85rem !important;
+  padding-left: 0.4rem !important;
+}
+
+.user-menu > .mdc-button__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-menu > .mat-mdc-menu-content {
+  height: 48px;
+  margin: 0;
+  padding: 0;
+}
+
+.mat-menu-cart > .mat-mdc-menu-content {
+  width: 266px;
+  text-align: center;
+  margin: 0;
+}
+
+.btn-cart > .mat-badge-content {
+  top: -2px !important;
+  right: -7px !important;
 }
