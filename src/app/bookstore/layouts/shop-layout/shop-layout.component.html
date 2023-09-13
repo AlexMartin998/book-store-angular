@@ -1,0 +1,34 @@
+<mat-toolbar class="d-flex align-items-center">
+  <span class="logo-container">Book | <span class="logo-shop">Shop</span></span>
+
+  <span class="spacer"></span>
+
+  <div>
+    <button mat-button rouerLink="/books" class="ms-3 navs">Books</button>
+    <button mat-button rouerLink="/books" class="ms-3 navs">Categories</button>
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="mx-4">
+    <div
+      [matMenuTriggerFor]="menu"
+      class="d-flex align-items-center gap-2 pointer"
+    >
+      <img src="/assets/avatar.png" alt="Avatar" class="avatar" />
+      <div>
+        <h3 class="avatar-title">User</h3>
+      </div>
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Log Out</button>
+    </mat-menu>
+  </div>
+  <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="py-5 container">
+  <router-outlet />
+</div>

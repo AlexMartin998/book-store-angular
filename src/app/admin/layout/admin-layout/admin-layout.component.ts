@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AdminLayoutComponent {
   public sidebarItems = [
+    { label: 'Home', icon: 'home', url: '/' },
     { label: 'Books', icon: 'library_books', url: '/admin/books' },
-    { label: 'Users', icon: 'supervisor_account', url: './new' },
+    { label: 'Users', icon: 'supervisor_account', url: '/new' },
   ];
 }

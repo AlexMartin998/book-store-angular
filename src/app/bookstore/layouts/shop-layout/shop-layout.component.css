@@ -1,0 +1,31 @@
+mat-toolbar {
+  background-color: #ffffff;
+}
+
+.logo-container {
+  margin: 0;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.logo-book {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.logo-shop {
+  display: block;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.navs {
+  border-radius: 6px;
+}
+
+.pointer {
+  cursor: pointer;
+}

@@ -2,18 +2,6 @@ mat-toolbar {
   background-color: #fafafa;
 }
 
-.avatar {
-  max-height: 32px;
-  max-width: 32px;
-}
-.avatar-title {
-  margin: 0px;
-  font-family: Inter, sans-serif;
-  line-height: 1.5;
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
 .pointer {
   cursor: pointer;
 }
