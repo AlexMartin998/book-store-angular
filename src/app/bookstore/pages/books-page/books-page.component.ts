@@ -15,9 +15,18 @@ export class BooksPageComponent implements OnInit {
   constructor(private readonly homeService: HomeService) {}
 
   ngOnInit(): void {
-    this.homeService.findAll().subscribe(({ books, pageNumber }) => {
+    this.homeService.findAll(6).subscribe(({ books, pageNumber }) => {
       this.books = books;
       this.currentPage = pageNumber;
     });
+  }
+
+  onScroll() {
+    this.homeService
+      .findAll(6, this.currentPage + 1)
+      .subscribe(({ books, pageNumber }) => {
+        this.books.push(...books);
+        this.currentPage = pageNumber;
+      });
   }
 }
