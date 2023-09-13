@@ -5,11 +5,12 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { BookstoreRoutingModule } from './bookstore-routing.module';
 
+import { BookCardComponent } from './components/book-card/book-card.component';
 import { ShopLayoutComponent } from './layouts/shop-layout/shop-layout.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
-  declarations: [HomePageComponent, ShopLayoutComponent],
+  declarations: [HomePageComponent, ShopLayoutComponent, BookCardComponent],
   imports: [CommonModule, BookstoreRoutingModule, SharedModule, MaterialModule],
 })
 export class BookstoreModule {}

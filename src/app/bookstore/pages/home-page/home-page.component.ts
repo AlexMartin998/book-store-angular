@@ -6,7 +6,7 @@ import { Book } from 'src/app/shared/interfaces';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styles: [],
+  styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
   private _books: Book[] = [];

@@ -1,0 +1,25 @@
+<mat-card class="book-card">
+  <div>
+    <img mat-card-image [src]="book.coverPath | safeImage" [alt]="book.title" />
+
+    <mat-card-content class="pb-3">
+      <a class="h4" [routerLink]="['/books', book.slug]">{{ book.title }}</a>
+      <p>{{ book.description | slice : 0 : 100 }}...</p>
+    </mat-card-content>
+  </div>
+
+  <span class="spacer"></span>
+  <mat-divider></mat-divider>
+
+  <mat-card-actions class="end-card">
+    <button mat-raised-button color="primary" class="w-100">
+      <mat-icon>add_shopping_cart</mat-icon> Agregar al carrito
+    </button>
+
+    <ng-template #removeButton>
+      <button mat-raised-button color="warn" class="w-100">
+        <mat-icon>remove_shopping_cart</mat-icon> Remover del carrito
+      </button>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>
