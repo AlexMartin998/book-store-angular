@@ -13,6 +13,10 @@ export class CartPageComponent {
     return this.cartService.items;
   }
 
+  get totalAmount() {
+    return this.items.map((i) => i.price).reduce((p1, p2) => p1 + p2, 0);
+  }
+
   remove(bookId: number) {
     this.cartService.removeItem(bookId);
   }

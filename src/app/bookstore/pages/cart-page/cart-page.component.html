@@ -1,4 +1,4 @@
-<div class="container py-5">
+<div class="container py-5 px-5">
   <h1 class="pb-3">Cart</h1>
 
   <div class="row justify-content-between">
@@ -46,7 +46,7 @@
         </div>
         <div class="pt-1 d-flex justify-content-between os-total">
           <p>Total:</p>
-          <p>{{ 12 | currency }}</p>
+          <p>{{ totalAmount | currency }}</p>
         </div>
 
         <button class="w-100 mt-5" mat-raised-button color="primary">
