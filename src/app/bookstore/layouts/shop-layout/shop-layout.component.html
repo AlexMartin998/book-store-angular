@@ -64,7 +64,7 @@
   </div>
 
   <!-- User Menu -->
-  <div>
+  <div *ngIf="user; else authBtns">
     <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu">
       <img src="/assets/avatar.png" alt="Avatar" class="avatar" />
       <h3 class="avatar-title">User</h3>
@@ -73,15 +73,28 @@
     <mat-menu #userMenu="matMenu" class="user-menu">
       <button mat-menu-item>
         <mat-icon class="btn-logout-text">logout</mat-icon>
-        <span class="logout-txt">Log Out</span>
+        <span (click)="onLogout()" class="logout-txt">Log Out</span>
       </button>
     </mat-menu>
   </div>
+  <ng-template #authBtns>
+    <div class="auth-btns">
+      <a
+        routerLink="/auth/login"
+        mat-raised-button
+        color="primary"
+        class="btn-login"
+      >
+        Log In
+      </a>
+      <a mat-button routerLink="/auth/register">Sign Up</a>
+    </div>
+  </ng-template>
 
   <!-- Menu -->
-  <button mat-icon-button>
+  <!-- <button mat-icon-button>
     <mat-icon>menu</mat-icon>
-  </button>
+  </button> -->
 </mat-toolbar>
 
 <div class="pb-5">

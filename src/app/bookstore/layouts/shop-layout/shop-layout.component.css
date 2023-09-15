@@ -71,3 +71,11 @@ mat-toolbar {
   color: white !important;
   font-weight: 600;
 }
+
+.auth-btns {
+  padding-left: 15px;
+}
+
+.btn-login {
+  margin-right: 6px;
+}
