@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 
-import { Book } from 'src/app/shared/interfaces';
-import { BookPage } from '../shared/interfaces';
+import { Book, BookPage } from 'src/app/shared/interfaces';
+import { PaymentOrderResponse } from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +29,26 @@ export class HomeService {
     return this.http
       .get<Book>(`${this.baseUrl}/home/books/${slug}`)
       .pipe(catchError((err) => throwError(() => err?.error?.message)));
+  }
+
+  // // PayPal
+  createPaymentOrder(bookIds: number[]): Observable<PaymentOrderResponse> {
+    const body = {
+      bookIds,
+      successUrl: 'http://localhost:4200/cart',
+      cancelUrl: 'http://localhost:4200/cart',
+    };
+
+    return this.http.post<PaymentOrderResponse>(
+      `${this.baseUrl}/home/checkout/payment-order`,
+      body
+    );
+  }
+
+  capturePaymentOrder(paymentOrderId: string): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/home/checkout/capture-payment?paymentOrderId=${paymentOrderId}`,
+      null
+    );
   }
 }

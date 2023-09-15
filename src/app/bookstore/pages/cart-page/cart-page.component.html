@@ -49,7 +49,15 @@
           <p>{{ totalAmount | currency }}</p>
         </div>
 
-        <button class="w-100 mt-5" mat-raised-button color="primary">
+        <button
+          *ngIf="!orderSuccess"
+          [disabled]="isPaymentBeingProcessed"
+          [class.spinner]="isPaymentBeingProcessed"
+          (click)="pay()"
+          class="w-100 mt-5"
+          mat-raised-button
+          color="primary"
+        >
           <mat-icon>paypal</mat-icon>
           Pay with PayPal
         </button>
