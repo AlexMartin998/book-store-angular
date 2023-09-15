@@ -7,6 +7,7 @@ import {
   AuthStatus,
   LoginCredentials,
   LoginResponse,
+  RenewTokenResponse,
 } from '../shared/interfaces';
 
 @Injectable({
@@ -39,12 +40,21 @@ export class AuthService {
   checkAuthStatus(): Observable<boolean> {
     const token = localStorage.getItem('token');
     if (!token) {
-      // this._authStatus.set(AuthStatus.notAuthenticated);
+      this._authStatus = AuthStatus.notAuthenticated;
       // this.logout();
       return of(false);
     }
 
-    return this.http.get(`${this.baseUrl}/auth/renew-token`).pipe();
+    return this.http
+      .get<RenewTokenResponse>(`${this.baseUrl}/auth/renew-token`)
+      .pipe(
+        map(({ user, token }) => this.setAuthentication(user, token)),
+        catchError(() => {
+          this._authStatus = AuthStatus.notAuthenticated;
+
+          return of(false);
+        })
+      );
   }
 
   private setAuthentication(user: User, token: string): boolean {
