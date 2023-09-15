@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { authGuard } from './auth/guards/auth.guard';
+import { publicGuard } from './auth/guards/public.guard';
 import { securedGuard } from './auth/guards/secured.guard';
 
 const routes: Routes = [
@@ -16,6 +17,8 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./bookstore/bookstore.module').then((m) => m.BookstoreModule),
+
+    canActivate: [publicGuard],
   },
   {
     path: 'auth',

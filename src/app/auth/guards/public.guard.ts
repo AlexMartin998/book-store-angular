@@ -1,0 +1,12 @@
+import { inject } from '@angular/core';
+import { CanActivateFn } from '@angular/router';
+
+import { AuthService } from '../services/auth.service';
+
+export const publicGuard: CanActivateFn = (route, state) => {
+  const authService: AuthService = inject(AuthService);
+
+  authService.checkAuthStatus().subscribe();
+
+  return true;
+};

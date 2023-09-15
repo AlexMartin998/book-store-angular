@@ -67,7 +67,7 @@
   <div *ngIf="user; else authBtns">
     <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu">
       <img src="/assets/avatar.png" alt="Avatar" class="avatar" />
-      <h3 class="avatar-title">User</h3>
+      <h3 class="avatar-title">{{ user.firstname }}</h3>
     </button>
 
     <mat-menu #userMenu="matMenu" class="user-menu">
