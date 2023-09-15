@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { User } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-admin-layout',
@@ -11,4 +15,20 @@ export class AdminLayoutComponent {
     { label: 'Books', icon: 'library_books', url: '/admin/books' },
     { label: 'Users', icon: 'supervisor_account', url: '/new' },
   ];
+
+  constructor(
+    private readonly authService: AuthService,
+    private router: Router
+  ) {}
+
+  get user(): User | undefined {
+    return this.authService.currentUser;
+  }
+
+  onLogout(): void {
+    this.authService.logout();
+
+    // with signals this navigation is not required
+    this.router.navigateByUrl('/');
+  }
 }

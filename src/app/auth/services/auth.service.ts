@@ -57,6 +57,11 @@ export class AuthService {
       );
   }
 
+  logout() {
+    this._currentUser = undefined;
+    localStorage.clear();
+  }
+
   private setAuthentication(user: User, token: string): boolean {
     this._currentUser = user;
     this._authStatus = AuthStatus.authenticated;
