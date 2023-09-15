@@ -13,22 +13,41 @@
       </div>
 
       <!-- detials -->
-      <div *ngFor="let book of books">
+      <div *ngFor="let orderItem of orderItems">
         <div class="d-flex gap-2 py-2">
-          <img [src]="book.coverPath | safeImage" alt="" class="mw-96px" />
+          <img
+            [src]="orderItem.book.coverPath | safeImage"
+            alt=""
+            class="mw-96px"
+          />
 
           <div>
-            <h4 class="fw-500">{{ book.title }}</h4>
-            <p class="fw-600">{{ book.price | currency }}</p>
+            <h4 class="fw-500">{{ orderItem.book.title }}</h4>
+            <p class="fw-600">{{ orderItem.book.price | currency }}</p>
 
+            <!-- download book -->
             <button
-              (click)="onDownload(book.id)"
+              (click)="onDownload(orderItem)"
+              [disabled]="orderItem.downloadsAvailable < 1"
               mat-button
               color="primary"
               class="btn-download"
             >
               <mat-icon>file_download</mat-icon> Download
             </button>
+
+            <span class="ms-2">
+              {{ orderItem.downloadsAvailable }}
+              {{
+                orderItem.downloadsAvailable
+                  | i18nPlural
+                    : {
+                        "=1": "download",
+                        other: "downloads"
+                      }
+              }}
+              available
+            </span>
           </div>
         </div>
       </div>

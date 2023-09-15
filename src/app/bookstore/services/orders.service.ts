@@ -15,4 +15,16 @@ export class OrdersService {
   findOne(orderId: number): Observable<PurchaseOrder> {
     return this.http.get<PurchaseOrder>(`${this.baseUrl}/orders/${orderId}`);
   }
+
+  downloadBookBasedOnOrderItem(
+    orderId: number,
+    itemId: number
+  ): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}/orders/${orderId}/items/${itemId}/books/download`,
+      {
+        responseType: 'blob', // api returns a binary
+      }
+    );
+  }
 }

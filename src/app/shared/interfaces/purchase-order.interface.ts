@@ -13,4 +13,5 @@ export interface OrderItem {
   id: number;
   priceAtPurchase: number;
   book: Book;
+  downloadsAvailable: number;
 }
