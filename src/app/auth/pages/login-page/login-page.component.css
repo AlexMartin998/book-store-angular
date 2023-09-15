@@ -1,0 +1,17 @@
+.login {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.login h1 {
+  font-size: 16px !important;
+  font-weight: 500;
+  text-align: center;
+}
+
+.login-form {
+  padding: 36px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  border-radius: 6px;
+}

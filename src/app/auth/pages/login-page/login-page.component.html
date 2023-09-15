@@ -1,0 +1,25 @@
+<div class="login row">
+  <form [formGroup]="form" class="login-form col-md-4">
+    <h1 class="pb-4 pt-1">Log In</h1>
+
+    <!-- Email -->
+    <mat-form-field appearance="outline" class="col-12 mb-1">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+      <mat-error>
+        <span inputError inputName="Email"></span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password -->
+    <mat-form-field appearance="outline" class="col-12 mb-1">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error>
+        <span inputError inputName="Password"></span>
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="col-12">Log In</button>
+  </form>
+</div>
