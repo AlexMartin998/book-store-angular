@@ -12,6 +12,7 @@ import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-pa
 import { BooksPageComponent } from './pages/books-page/books-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
+import { OrderPageComponent } from './pages/order-page/order-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CartPageComponent } from './pages/cart-page/cart-page.component';
     BookDetailPageComponent,
     BooksPageComponent,
     CartPageComponent,
+    OrderPageComponent,
   ],
   imports: [
     CommonModule,

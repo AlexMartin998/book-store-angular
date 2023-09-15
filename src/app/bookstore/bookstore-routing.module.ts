@@ -6,6 +6,7 @@ import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-pa
 import { BooksPageComponent } from './pages/books-page/books-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { OrderPageComponent } from './pages/order-page/order-page.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,10 @@ const routes: Routes = [
         path: 'book/:slug',
         component: BookDetailPageComponent,
       },
+
       { path: 'cart', component: CartPageComponent },
+
+      { path: 'orders/:id', component: OrderPageComponent },
     ],
   },
 ];

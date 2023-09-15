@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -21,9 +22,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatBadgeModule,
     MatButtonModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatMenuModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
@@ -33,7 +36,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTableModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatListModule,
   ],
 })
 export class MaterialModule {}
