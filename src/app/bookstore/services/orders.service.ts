@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 import { PurchaseOrder } from 'src/app/shared/interfaces';
 
@@ -13,7 +13,9 @@ export class OrdersService {
   private http = inject(HttpClient);
 
   findOne(orderId: number): Observable<PurchaseOrder> {
-    return this.http.get<PurchaseOrder>(`${this.baseUrl}/orders/${orderId}`);
+    return this.http
+      .get<PurchaseOrder>(`${this.baseUrl}/orders/${orderId}`)
+      .pipe(catchError((err) => throwError(() => err?.error?.message)));
   }
 
   downloadBookBasedOnOrderItem(

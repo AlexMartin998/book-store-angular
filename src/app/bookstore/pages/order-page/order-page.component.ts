@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 
-import { Book, PurchaseOrder } from 'src/app/shared/interfaces';
-import { OrdersService } from '../../services/orders.service';
+import { PurchaseOrder } from 'src/app/shared/interfaces';
 import { OrderItem } from '../../../shared/interfaces/purchase-order.interface';
+import { OrdersService } from '../../services/orders.service';
 
 @Component({
   selector: 'app-order-page',
@@ -10,28 +12,32 @@ import { OrderItem } from '../../../shared/interfaces/purchase-order.interface';
   styleUrls: ['./order-page.component.css'],
 })
 export class OrderPageComponent implements OnInit {
-  public books: Book[] = [];
-  public order?: PurchaseOrder;
-  public orderItems: OrderItem[] = [];
+  public order!: PurchaseOrder;
 
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(
+    private readonly ordersService: OrdersService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.ordersService.findOne(21).subscribe((order) => {
-      this.order = order;
-      this.orderItems = order.orderItems;
-
-      order.orderItems.forEach(({ book }) => {
-        this.books.push(book);
+    this.activatedRoute.params
+      .pipe(switchMap(({ id }) => this.ordersService.findOne(id)))
+      .subscribe({
+        next: (order) => {
+          this.order = order;
+        },
+        error: (error) => {
+          this.router.navigateByUrl('/');
+        },
       });
-    });
   }
 
   onDownload(orderItem: OrderItem) {
     if (orderItem.downloadsAvailable <= 0) return;
 
     this.ordersService
-      .downloadBookBasedOnOrderItem(this.order!.id, orderItem.id)
+      .downloadBookBasedOnOrderItem(this.order.id, orderItem.id)
       .subscribe((blob) => {
         // capture binary
         const _blob = new Blob([blob], {

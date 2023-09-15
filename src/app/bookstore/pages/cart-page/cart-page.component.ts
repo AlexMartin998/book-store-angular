@@ -31,8 +31,7 @@ export class CartPageComponent implements OnInit {
       if (!res.completed) return;
 
       this.cartService.clear();
-      // this.router.navigate(['/orders', res.orderId]);
-      this.router.navigate(['/books']);
+      this.router.navigate(['/orders', res.orderId]);
     });
   }
 
