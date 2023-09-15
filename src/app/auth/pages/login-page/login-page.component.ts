@@ -50,8 +50,8 @@ export class LoginPageComponent {
     this.showSnackbar(`Welcome ${authUser!.firstname}`);
 
     // redirect based on user role
-    if (authUser?.role.name == 'ADMIN')
-      return this.router.navigateByUrl('/admin');
+    if (authUser?.role.name === 'ADMIN')
+      return this.router.navigateByUrl('/admin/books');
 
     return this.router.navigateByUrl('/cart');
   }
