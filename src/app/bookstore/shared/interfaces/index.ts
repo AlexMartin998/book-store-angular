@@ -1,1 +1,1 @@
-export * from './book-page.interface';
+export * from './payment-order-response.interface';
