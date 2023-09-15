@@ -1,0 +1,8 @@
+.auth-container {
+  /* background-color: rebeccapurple; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6.6rem;
+  width: 100%;
+}
