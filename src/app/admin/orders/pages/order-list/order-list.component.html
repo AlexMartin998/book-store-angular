@@ -45,7 +45,11 @@
     <!-- Status -->
     <ng-component matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let order">
+      <td
+        mat-cell
+        *matCellDef="let order"
+        [ngStyle]="{ color: isPaid(order.id) ? 'green' : 'red' }"
+      >
         {{ order.paymentStatus | titlecase }}
       </td>
     </ng-component>

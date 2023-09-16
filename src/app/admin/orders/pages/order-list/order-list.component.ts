@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 
 import { OrderPage } from 'src/app/shared/interfaces';
 import { OrdersService } from '../../services/orders.service';
+import { PaymentStatus } from 'src/app/dashboard/shared/interfaces';
 
 @Component({
   selector: 'app-order-list',
@@ -28,6 +29,11 @@ export class OrderListComponent implements OnInit {
     this.ordersService
       .findAll()
       .subscribe((orderPage) => (this.orderPage = orderPage));
+  }
+
+  isPaid(orderId: number) {
+    const order = this.orderPage?.orders.find((order) => order.id === orderId);
+    return order?.paymentStatus === PaymentStatus.PAID;
   }
 
   paginateOrders(event: PageEvent) {
