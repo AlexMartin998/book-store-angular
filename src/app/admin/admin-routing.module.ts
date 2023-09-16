@@ -5,6 +5,7 @@ import { BookListPageComponent } from './books/pages/book-list-page/book-list-pa
 import { SaveBookPageComponent } from './books/pages/save-book-page/save-book-page.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { OrderListComponent } from './orders/pages/order-list/order-list.component';
+import { OrderPageComponent } from './orders/pages/order-page/order-page.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,10 @@ const routes: Routes = [
 
       {
         path: 'orders',
-        children: [{ path: '', component: OrderListComponent }],
+        children: [
+          { path: '', component: OrderListComponent },
+          { path: ':id', component: OrderPageComponent },
+        ],
       },
 
       { path: '**', redirectTo: 'books' }, // /admin -> /admin/books

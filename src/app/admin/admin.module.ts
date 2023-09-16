@@ -9,6 +9,7 @@ import { BookListPageComponent } from './books/pages/book-list-page/book-list-pa
 import { SaveBookPageComponent } from './books/pages/save-book-page/save-book-page.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { OrderListComponent } from './orders/pages/order-list/order-list.component';
+import { OrderPageComponent } from './orders/pages/order-page/order-page.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { OrderListComponent } from './orders/pages/order-list/order-list.compone
     AdminLayoutComponent,
     SaveBookPageComponent,
     OrderListComponent,
+    OrderPageComponent,
   ],
   imports: [
     CommonModule,
