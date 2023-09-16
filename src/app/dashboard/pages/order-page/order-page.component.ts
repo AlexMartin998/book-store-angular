@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
-import { OrdersService } from 'src/app/bookstore/services/orders.service';
-import { PurchaseOrder } from 'src/app/shared/interfaces';
-import { OrderItem } from '../../../shared/interfaces/purchase-order.interface';
+import { OrderItem, PurchaseOrder } from 'src/app/shared/interfaces';
+import { OrdersService } from '../../services/orders.service';
 
 @Component({
   selector: 'dashboard-order-page',
