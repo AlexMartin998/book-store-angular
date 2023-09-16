@@ -5,7 +5,7 @@
     <!-- Left side -->
     <div class="col-md-6">
       <!-- chip -->
-      <div class="order-mat-chip mb-4">
+      <div *ngIf="isPaid; else pending" class="order-mat-chip mb-4">
         <mat-chip>
           <mat-icon>credit_score</mat-icon>
           <span class="txt-chip">Paid purchase order</span>
@@ -26,28 +26,30 @@
             <p class="fw-600">{{ orderItem.book.price | currency }}</p>
 
             <!-- download book -->
-            <button
-              (click)="onDownload(orderItem)"
-              [disabled]="orderItem.downloadsAvailable < 1"
-              mat-button
-              color="primary"
-              class="btn-download"
-            >
-              <mat-icon>file_download</mat-icon> Download
-            </button>
+            <div *ngIf="isPaid">
+              <button
+                (click)="onDownload(orderItem)"
+                [disabled]="orderItem.downloadsAvailable < 1"
+                mat-button
+                color="primary"
+                class="btn-download"
+              >
+                <mat-icon>file_download</mat-icon> Download
+              </button>
 
-            <span class="ms-2">
-              {{ orderItem.downloadsAvailable }}
-              {{
-                orderItem.downloadsAvailable
-                  | i18nPlural
-                    : {
-                        "=1": "download",
-                        other: "downloads"
-                      }
-              }}
-              available
-            </span>
+              <span class="ms-2">
+                {{ orderItem.downloadsAvailable }}
+                {{
+                  orderItem.downloadsAvailable
+                    | i18nPlural
+                      : {
+                          "=1": "download",
+                          other: "downloads"
+                        }
+                }}
+                available
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -67,7 +69,10 @@
           <p>{{ order.totalAmount | currency }}</p>
         </div>
 
-        <div class="order-mat-chip mt-4 chip-summary">
+        <div
+          *ngIf="isPaid; else pendingPayment"
+          class="order-mat-chip mt-4 chip-summary"
+        >
           <mat-chip>
             <mat-icon>credit_score</mat-icon>
             <span class="txt-chip">Paid purchase order</span>
@@ -77,3 +82,21 @@
     </div>
   </div>
 </div>
+
+<!-- templates -->
+<ng-template #pendingPayment>
+  <div class="order-mat-chip mt-4 chip-summary pending">
+    <mat-chip class="mat-pending">
+      <mat-icon>credit_card_off</mat-icon>
+      <span class="txt-chip">Pending payment</span>
+    </mat-chip>
+  </div>
+</ng-template>
+<ng-template #pending>
+  <div class="order-mat-chip mb-4 pending">
+    <mat-chip class="mat-pending">
+      <mat-icon>credit_card_off</mat-icon>
+      <span class="txt-chip">Pending payment</span>
+    </mat-chip>
+  </div>
+</ng-template>

@@ -36,7 +36,7 @@ export class HomeService {
     const body = {
       bookIds,
       successUrl: 'http://localhost:4200/cart',
-      cancelUrl: 'http://localhost:4200/cart',
+      cancelUrl: 'http://localhost:4200',
     };
 
     return this.http.post<PaymentOrderResponse>(

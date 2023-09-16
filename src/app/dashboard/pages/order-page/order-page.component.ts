@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { OrderItem, PurchaseOrder } from 'src/app/shared/interfaces';
 import { OrdersService } from '../../services/orders.service';
+import { PaymentStatus } from '../../shared/interfaces';
 
 @Component({
   selector: 'dashboard-order-page',
@@ -33,6 +34,10 @@ export class OrderPageComponent implements OnInit {
           this.router.navigateByUrl('/');
         },
       });
+  }
+
+  get isPaid() {
+    return this.order.paymentStatus == PaymentStatus.PAID;
   }
 
   onDownload(orderItem: OrderItem) {
