@@ -8,6 +8,7 @@ import {
   LoginCredentials,
   LoginResponse,
   RenewTokenResponse,
+  RoleEnum,
 } from '../shared/interfaces';
 
 @Injectable({
@@ -26,6 +27,10 @@ export class AuthService {
 
   get authStatus() {
     return this._authStatus;
+  }
+
+  get isAdmin(): boolean {
+    return this._currentUser?.role.name === RoleEnum.ADMIN;
   }
 
   login(loginCredentials: LoginCredentials): Observable<boolean> {

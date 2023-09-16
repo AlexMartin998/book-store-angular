@@ -70,15 +70,19 @@
       <h3 class="avatar-title">{{ user.firstname }}</h3>
     </button>
 
-    <mat-menu #userMenu="matMenu" class="user-menu">
-      <button mat-menu-item>
+    <mat-menu #userMenu="matMenu">
+      <button *ngIf="isAdmin" mat-menu-item routerLink="/admin/books">
+        <mat-icon class="btn-logout-text">admin_panel_settings</mat-icon>
+        <span class="logout-txt">Admin Panel</span>
+      </button>
+      <button mat-menu-item (click)="onLogout()">
         <mat-icon class="btn-logout-text">logout</mat-icon>
-        <span (click)="onLogout()" class="logout-txt">Log Out</span>
+        <span class="logout-txt">Log Out</span>
       </button>
     </mat-menu>
   </div>
   <ng-template #authBtns>
-    <div class="auth-btns">
+    <div *ngIf="!isChecking" class="auth-btns">
       <a
         routerLink="/auth/login"
         mat-raised-button

@@ -2,16 +2,6 @@ mat-toolbar {
   background-color: #ffffff;
 }
 
-.btn-logout-text {
-  font-size: 15px;
-  padding-top: 4px;
-  margin-right: 3px !important;
-}
-
-.logout-txt {
-  font-size: 15px;
-}
-
 .logo-container {
   margin: 0;
   display: flex;

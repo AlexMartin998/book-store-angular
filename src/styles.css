@@ -180,3 +180,13 @@ h1 {
 .chip-summary .mdc-evolution-chip__cell {
   justify-content: center;
 }
+
+.btn-logout-text {
+  font-size: 15px;
+  padding-top: 4px;
+  margin-right: 3px !important;
+}
+
+.logout-txt {
+  font-size: 15px;
+}

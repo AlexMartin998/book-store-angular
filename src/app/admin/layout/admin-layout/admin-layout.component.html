@@ -40,7 +40,11 @@
         </div>
       </div>
       <mat-menu #menu="matMenu">
-        <button (click)="onLogout()" mat-menu-item>Log Out</button>
+        <!-- <button (click)="onLogout()" mat-menu-item>Log Out</button> -->
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon class="btn-logout-text">logout</mat-icon>
+          <span class="logout-txt">Log Out</span>
+        </button>
       </mat-menu>
     </div>
   </mat-toolbar>
