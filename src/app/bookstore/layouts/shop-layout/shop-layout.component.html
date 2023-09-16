@@ -75,14 +75,17 @@
         <mat-icon class="btn-logout-text">admin_panel_settings</mat-icon>
         <span class="logout-txt">Admin Panel</span>
       </button>
-      <button mat-menu-item routerLink="/dashboard/profile">
+
+      <!-- Auth -->
+      <button *ngIf="!isAdmin" mat-menu-item routerLink="/dashboard/profile">
         <mat-icon class="btn-logout-text">manage_accounts</mat-icon>
         <span class="logout-txt">Profile</span>
       </button>
-      <button mat-menu-item routerLink="/dashboard/orders">
+      <button *ngIf="!isAdmin" mat-menu-item routerLink="/dashboard/orders">
         <mat-icon class="btn-logout-text">confirmation_number</mat-icon>
         <span class="logout-txt">Purchase History</span>
       </button>
+
       <button mat-menu-item (click)="onLogout()">
         <mat-icon class="btn-logout-text">logout</mat-icon>
         <span class="logout-txt">Log Out</span>

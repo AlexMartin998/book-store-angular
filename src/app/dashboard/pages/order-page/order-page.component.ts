@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { OrderItem, PurchaseOrder } from 'src/app/shared/interfaces';
 import { OrdersService } from '../../services/orders.service';
@@ -16,7 +17,8 @@ export class OrderPageComponent implements OnInit {
   constructor(
     private readonly ordersService: OrdersService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +28,8 @@ export class OrderPageComponent implements OnInit {
         next: (order) => {
           this.order = order;
         },
-        error: (error) => {
+        error: (errorMessage) => {
+          this.showSnackbar(errorMessage);
           this.router.navigateByUrl('/');
         },
       });
@@ -54,5 +57,14 @@ export class OrderPageComponent implements OnInit {
 
         orderItem.downloadsAvailable -= 1;
       });
+  }
+
+  private showSnackbar(message: string): void {
+    this.snackbar.open(message, 'done', {
+      duration: 2700,
+      panelClass: ['redNoMatch'],
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+    });
   }
 }
