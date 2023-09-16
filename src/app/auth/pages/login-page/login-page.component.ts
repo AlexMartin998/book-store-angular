@@ -40,7 +40,7 @@ export class LoginPageComponent {
     this.snackbar.open(message, 'done', {
       duration: 2700,
       panelClass: ['redNoMatch'],
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       horizontalPosition: 'right',
     });
   }
@@ -53,6 +53,6 @@ export class LoginPageComponent {
     if (authUser?.role.name === 'ADMIN')
       return this.router.navigateByUrl('/admin/books');
 
-    return this.router.navigateByUrl('/cart');
+    return this.router.navigateByUrl('/');
   }
 }

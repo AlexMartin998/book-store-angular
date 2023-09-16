@@ -42,22 +42,26 @@ export class AuthService {
       );
   }
 
-  checkAuthStatus(): Observable<boolean> {
+  checkAuthStatus(): Observable<User | null> {
     const token = localStorage.getItem('token');
     if (!token) {
       this._authStatus = AuthStatus.notAuthenticated;
       // this.logout();
-      return of(false);
+      return of(null);
     }
 
     return this.http
       .get<RenewTokenResponse>(`${this.baseUrl}/auth/renew-token`)
       .pipe(
-        map(({ user, token }) => this.setAuthentication(user, token)),
+        map((res) => {
+          this.setAuthentication(res.user, res.token);
+
+          return res.user;
+        }),
         catchError(() => {
           this._authStatus = AuthStatus.notAuthenticated;
 
-          return of(false);
+          return of(null);
         })
       );
   }
