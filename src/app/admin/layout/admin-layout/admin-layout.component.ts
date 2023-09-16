@@ -28,7 +28,7 @@ export class AdminLayoutComponent {
   onLogout(): void {
     this.authService.logout();
 
-    // with signals this navigation is not required
+    // with signals this navigation is not necessary
     this.router.navigateByUrl('/');
   }
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { AuthService } from '../../../auth/services/auth.service';
 import { CartService } from '../../services/cart.service';
 import { HomeService } from '../../services/home.service';
+import { AuthStatus } from 'src/app/auth/shared/interfaces';
 
 @Component({
   selector: 'app-cart-page',
@@ -16,6 +18,7 @@ export class CartPageComponent implements OnInit {
   constructor(
     private readonly cartService: CartService,
     private readonly homeService: HomeService,
+    private readonly authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -43,11 +46,22 @@ export class CartPageComponent implements OnInit {
     return this.items.map((i) => i.price).reduce((p1, p2) => p1 + p2, 0);
   }
 
+  get isAuth() {
+    return this.authService.authStatus === AuthStatus.authenticated;
+  }
+
   remove(bookId: number) {
     this.cartService.removeItem(bookId);
   }
 
   //
+
+  onCheckout() {
+    this.router.navigate(['/auth/login'], {
+      queryParams: { lastPage: '/cart' },
+    });
+  }
+
   pay() {
     this.isPaymentBeingProcessed = true;
     if (!this.isPaymentBeingProcessed) return;

@@ -50,7 +50,7 @@
         </div>
 
         <button
-          *ngIf="!orderSuccess"
+          *ngIf="!orderSuccess && isAuth"
           [disabled]="isPaymentBeingProcessed"
           [class.spinner]="isPaymentBeingProcessed"
           (click)="pay()"
@@ -60,6 +60,16 @@
         >
           <mat-icon>paypal</mat-icon>
           Pay with PayPal
+        </button>
+
+        <button
+          *ngIf="!isAuth"
+          class="w-100 mt-5"
+          (click)="onCheckout()"
+          mat-raised-button
+          color="primary"
+        >
+          Checkout
         </button>
       </div>
     </div>
