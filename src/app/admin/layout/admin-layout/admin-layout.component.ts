@@ -13,7 +13,8 @@ export class AdminLayoutComponent {
   public sidebarItems = [
     { label: 'Home', icon: 'home', url: '/' },
     { label: 'Books', icon: 'library_books', url: '/admin/books' },
-    { label: 'Users', icon: 'supervisor_account', url: '/new' },
+    { label: 'Orders', icon: 'confirmation_number', url: '/admin/orders' },
+    { label: 'Users', icon: 'supervisor_account', url: '/admin/new' },
   ];
 
   constructor(

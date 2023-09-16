@@ -1,0 +1,81 @@
+<ng-template #loading>
+  <div class="container d-flex align-items-center justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+
+<h1>Purchase Orders</h1>
+
+<!-- <pre>{{orderPage?.orders | json}}</pre> -->
+
+<div *ngIf="orderPage?.orders; else loading" class="orders-table mt-4">
+  <table mat-table [dataSource]="orderPage!.orders">
+    <!-- ID -->
+    <ng-component matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let order">
+        {{ order.id }}
+      </td>
+    </ng-component>
+
+    <!-- Full name -->
+    <ng-component matColumnDef="fullname">
+      <th mat-header-cell *matHeaderCellDef>Full name</th>
+      <td mat-cell *matCellDef="let order">
+        {{ order.customer.firstname }} {{ order.customer.lastname }}
+      </td>
+    </ng-component>
+
+    <!-- Date -->
+    <ng-component matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let order">
+        {{ order.createdAt | date }}
+      </td>
+    </ng-component>
+
+    <!-- Total Amount -->
+    <ng-component matColumnDef="totalAmount">
+      <th mat-header-cell *matHeaderCellDef>Total Price</th>
+      <td mat-cell *matCellDef="let order" class="total-price">
+        {{ order.totalAmount | currency }}
+      </td>
+    </ng-component>
+
+    <!-- Status -->
+    <ng-component matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let order">
+        {{ order.paymentStatus | titlecase }}
+      </td>
+    </ng-component>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let order" class="text-end">
+        <button
+          [routerLink]="['/dashboard/orders', order.id]"
+          mat-button
+          color="primary"
+        >
+          Show order
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- Paging -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+    [length]="orderPage!.totalElements"
+    [pageSize]="orderPage!.size"
+    (page)="paginateOrders($event)"
+  >
+  </mat-paginator>
+</div>

@@ -29,7 +29,7 @@ export class OrdersService {
   findAllByCustomer(size: number = 10, page: number = 0): Observable<any> {
     const params = new HttpParams().set('page', page).set('size', size);
 
-    return this.http.get(`${this.baseUrl}/orders`, { params });
+    return this.http.get(`${this.baseUrl}/orders/customer`, { params });
   }
 
   downloadBookBasedOnOrderItem(

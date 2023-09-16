@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookListPageComponent } from './books/pages/book-list-page/book-list-page.component';
 import { SaveBookPageComponent } from './books/pages/save-book-page/save-book-page.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { OrderListComponent } from './orders/pages/order-list/order-list.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
             component: SaveBookPageComponent,
           },
         ],
+      },
+
+      {
+        path: 'orders',
+        children: [{ path: '', component: OrderListComponent }],
       },
 
       { path: '**', redirectTo: 'books' }, // /admin -> /admin/books
