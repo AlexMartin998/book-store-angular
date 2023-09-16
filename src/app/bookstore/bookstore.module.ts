@@ -10,9 +10,8 @@ import { BookCardComponent } from './components/book-card/book-card.component';
 import { ShopLayoutComponent } from './layouts/shop-layout/shop-layout.component';
 import { BookDetailPageComponent } from './pages/book-detail-page/book-detail-page.component';
 import { BooksPageComponent } from './pages/books-page/books-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
-import { OrderPageComponent } from './pages/order-page/order-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import { OrderPageComponent } from './pages/order-page/order-page.component';
     BookDetailPageComponent,
     BooksPageComponent,
     CartPageComponent,
-    OrderPageComponent,
   ],
   imports: [
     CommonModule,

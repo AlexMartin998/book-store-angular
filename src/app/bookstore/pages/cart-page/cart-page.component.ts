@@ -34,7 +34,7 @@ export class CartPageComponent implements OnInit {
       if (!res.completed) return;
 
       this.cartService.clear();
-      this.router.navigate(['/orders', res.orderId]);
+      this.router.navigate(['/dashboard/orders', res.orderId]);
     });
   }
 
@@ -55,7 +55,6 @@ export class CartPageComponent implements OnInit {
   }
 
   //
-
   onCheckout() {
     this.router.navigate(['/auth/login'], {
       queryParams: { lastPage: '/cart' },
