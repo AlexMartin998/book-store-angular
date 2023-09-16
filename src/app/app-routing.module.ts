@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
 
-    canActivate: [securedGuard, adminGuard],
+    canActivate: [adminGuard],
   },
   {
     path: '',
@@ -22,11 +22,20 @@ const routes: Routes = [
     canActivate: [publicGuard],
   },
   {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+
+    canActivate: [securedGuard],
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
 
     canActivate: [authGuard],
   },
+
+  // http://localhost:4200/orders/35
 
   { path: '**', redirectTo: '/' },
 ];
