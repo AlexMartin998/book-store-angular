@@ -55,4 +55,10 @@ export class BooksService {
       formData
     );
   }
+
+  delete(bookId: number): Observable<boolean> {
+    return this.http
+      .delete<boolean>(`${this.baseUrl}/books/${bookId}`)
+      .pipe(catchError((err) => throwError(() => err?.error?.message)));
+  }
 }

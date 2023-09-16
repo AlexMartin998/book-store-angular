@@ -46,6 +46,8 @@ export class InputErrorDirective {
       );
     if (errors.includes('email'))
       return this.setErrorMessage('Invalid eamil format');
+    if (errors.includes('slugNotAvailable'))
+      return this.setErrorMessage('Slug already taken');
   }
 
   private setErrorMessage(errorMessage: string) {

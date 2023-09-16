@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -9,7 +11,6 @@ import {
   tap,
 } from 'rxjs/operators';
 
-import { of } from 'rxjs';
 import { Book, Category } from 'src/app/admin/shared/interfaces';
 import { BooksService } from '../../services/books.service';
 
@@ -43,7 +44,8 @@ export class SaveBookPageComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private readonly booksService: BooksService
+    private readonly booksService: BooksService,
+    private snackbar: MatSnackBar
   ) {}
 
   get currentBook(): Book {
@@ -107,12 +109,19 @@ export class SaveBookPageComponent implements OnInit {
     if (this.currentBook?.id) {
       return this.booksService.update(this.currentBook).subscribe((hero) => {
         // show snackbar
+        this.showSnackbar(`${this.currentBook.title} updated`);
 
         this.router.navigateByUrl('/admin/books');
       });
     }
 
     this.booksService.create(this.currentBook).subscribe((hero) => {
+      this.showSnackbar(
+        `The book '${
+          this.bookForm.get('title')?.value
+        }' was successfully created`
+      );
+
       this.router.navigateByUrl('/admin/books');
     });
 
@@ -144,5 +153,14 @@ export class SaveBookPageComponent implements OnInit {
         this.bookForm.controls[control].setValue(res.filename);
       });
     }
+  }
+
+  private showSnackbar(message: string): void {
+    this.snackbar.open(message, 'done', {
+      duration: 2700,
+      panelClass: ['redNoMatch'],
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+    });
   }
 }

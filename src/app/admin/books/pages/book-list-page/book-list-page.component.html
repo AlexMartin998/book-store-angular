@@ -12,8 +12,8 @@
   </button>
 </div>
 
-<div *ngIf="books; else loading" class="admin-table mt-3">
-  <table mat-table [dataSource]="books">
+<div *ngIf="bookPage?.books; else loading" class="admin-table mt-3">
+  <table mat-table [dataSource]="bookPage!.books">
     <!-- Title -->
     <ng-component matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Book</th>
@@ -71,6 +71,7 @@
         </button>
         <button
           mat-icon-button
+          (click)="delete(book.id)"
           class="ms-2"
           color="warn"
           matTooltip="Delete book"

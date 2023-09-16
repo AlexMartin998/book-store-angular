@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BookPage } from 'src/app/admin/shared/interfaces';
 import { BooksService } from '../../services/books.service';
-import { PageEvent } from '@angular/material/paginator';
+
+// TODO: paging based on QueryParams (URL)
 
 @Component({
   selector: 'admin-book-list-page',
@@ -19,7 +22,10 @@ export class BookListPageComponent implements OnInit {
     'actions',
   ];
 
-  constructor(private readonly booksService: BooksService) {}
+  constructor(
+    private readonly booksService: BooksService,
+    private snackbar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.booksService.findAll(5, 0).subscribe((bookPage) => {
@@ -27,8 +33,10 @@ export class BookListPageComponent implements OnInit {
     });
   }
 
-  get books() {
-    return this.bookPage?.books;
+  refreshBookPage() {
+    this.booksService
+      .findAll(5, 0)
+      .subscribe((bookPage) => (this.bookPage = bookPage));
   }
 
   paginateBooks(event: PageEvent) {
@@ -38,5 +46,26 @@ export class BookListPageComponent implements OnInit {
     this.booksService
       .findAll(size, page)
       .subscribe((bookPage) => (this.bookPage = bookPage));
+  }
+
+  delete(bookId: number) {
+    if (!confirm('¿Estás seguro de eliminar este libro?')) return;
+
+    this.booksService.delete(bookId).subscribe({
+      next: () => {
+        this.showSnackbar('Book successfully deleted');
+        this.refreshBookPage();
+      },
+      error: (errorMessage) => this.showSnackbar(errorMessage),
+    });
+  }
+
+  private showSnackbar(message: string): void {
+    this.snackbar.open(message, 'done', {
+      duration: 2700,
+      panelClass: ['redNoMatch'],
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+    });
   }
 }
