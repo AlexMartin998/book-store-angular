@@ -1,1 +1,106 @@
-<p>dashboard-layout works!</p>
+<mat-toolbar class="d-flex align-items-center">
+  <span class="logo-container" routerLink="/"
+    >Book | <span class="logo-shop">Shop</span></span
+  >
+
+  <span class="spacer"></span>
+
+  <div>
+    <button mat-button routerLink="/books" class="ms-3 navs">Books</button>
+    <button mat-button routerLink="/categories" class="ms-3 navs">
+      Categories
+    </button>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Cart -->
+  <div>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="cartMenu"
+      [matBadge]="cartItems.length"
+      class="me-2 btn-cart"
+    >
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <mat-menu #cartMenu="matMenu" class="mat-menu-cart">
+      <!-- container to show items -->
+      <ng-container *ngIf="cartItems.length; else emptyCart">
+        <mat-nav-list class="cart-menu">
+          <mat-list-item
+            *ngFor="let item of cartItems"
+            [routerLink]="['/book', item.slug]"
+          >
+            <div class="d-flex gap-3">
+              <img
+                [src]="item.coverPath | safeImage"
+                [alt]="item.title"
+                class="cart-item-img"
+              />
+
+              <div>
+                <div class="font-weight-bold">
+                  {{ item.title | slice : 0 : 20 }}...
+                </div>
+                <p>{{ item.price | currency }}</p>
+              </div>
+            </div>
+          </mat-list-item>
+          <mat-list-item class="btn-go-cart" routerLink="/cart">
+            <span class="btn-cart-txt"> Go to cart </span>
+          </mat-list-item>
+        </mat-nav-list>
+      </ng-container>
+    </mat-menu>
+
+    <ng-template #emptyCart>
+      <div class="empty-cart">
+        <p>Your cart is empty.</p>
+        <span routerLink="/books">Keep shopping</span>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- User Menu -->
+  <div *ngIf="user; else authBtns">
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu">
+      <img src="/assets/avatar.png" alt="Avatar" class="avatar" />
+      <h3 class="avatar-title">{{ user.firstname }}</h3>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button *ngIf="isAdmin" mat-menu-item routerLink="/admin/books">
+        <mat-icon class="btn-logout-text">admin_panel_settings</mat-icon>
+        <span class="logout-txt">Admin Panel</span>
+      </button>
+      <button mat-menu-item (click)="onLogout()">
+        <mat-icon class="btn-logout-text">logout</mat-icon>
+        <span class="logout-txt">Log Out</span>
+      </button>
+    </mat-menu>
+  </div>
+  <ng-template #authBtns>
+    <div *ngIf="!isChecking" class="auth-btns">
+      <a
+        routerLink="/auth/login"
+        mat-raised-button
+        color="primary"
+        class="btn-login"
+      >
+        Log In
+      </a>
+      <a mat-button routerLink="/auth/register">Sign Up</a>
+    </div>
+  </ng-template>
+
+  <!-- Menu -->
+  <!-- <button mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button> -->
+</mat-toolbar>
+
+<div class="pb-5">
+  <router-outlet />
+</div>

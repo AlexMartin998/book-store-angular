@@ -1,0 +1,71 @@
+mat-toolbar {
+  background-color: #ffffff;
+}
+
+.logo-container {
+  margin: 0;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.logo-book {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.logo-shop {
+  display: block;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.navs {
+  border-radius: 6px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.cart-item-img {
+  max-width: 33px;
+  height: 54px;
+}
+
+.cart-menu > mat-list-item {
+  height: 64px;
+  text-align: start;
+}
+
+.empty-cart > span {
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: 16px;
+  color: #3f51b5;
+  cursor: pointer;
+}
+
+.btn-go-cart {
+  text-align: center !important;
+  background-color: #3f51b5 !important;
+  margin-top: 15px !important;
+  width: 87% !important;
+  margin: auto;
+  height: 48px !important;
+}
+
+.btn-cart-txt {
+  color: white !important;
+  font-weight: 600;
+}
+
+.auth-btns {
+  padding-left: 15px;
+}
+
+.btn-login {
+  margin-right: 6px;
+}
