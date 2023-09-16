@@ -1,0 +1,79 @@
+<div class="container p-5" *ngIf="order">
+  <h1 class="pb-3">Order: {{ order.id }}</h1>
+
+  <div class="row mt-3 justify-content-between">
+    <!-- Left side -->
+    <div class="col-md-6">
+      <!-- chip -->
+      <div class="order-mat-chip mb-4">
+        <mat-chip>
+          <mat-icon>credit_score</mat-icon>
+          <span class="txt-chip">Paid purchase order</span>
+        </mat-chip>
+      </div>
+
+      <!-- detials -->
+      <div *ngFor="let orderItem of order.orderItems">
+        <div class="d-flex gap-2 py-2">
+          <img
+            [src]="orderItem.book.coverPath | safeImage"
+            alt=""
+            class="mw-96px"
+          />
+
+          <div>
+            <h4 class="fw-500">{{ orderItem.book.title }}</h4>
+            <p class="fw-600">{{ orderItem.book.price | currency }}</p>
+
+            <!-- download book -->
+            <button
+              (click)="onDownload(orderItem)"
+              [disabled]="orderItem.downloadsAvailable < 1"
+              mat-button
+              color="primary"
+              class="btn-download"
+            >
+              <mat-icon>file_download</mat-icon> Download
+            </button>
+
+            <span class="ms-2">
+              {{ orderItem.downloadsAvailable }}
+              {{
+                orderItem.downloadsAvailable
+                  | i18nPlural
+                    : {
+                        "=1": "download",
+                        other: "downloads"
+                      }
+              }}
+              available
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Order Summary-->
+    <div class="col-md-4">
+      <div class="order-summary-box">
+        <h3 class="fw-500">Order Summary</h3>
+
+        <div class="pt-1 d-flex justify-content-between os-desc">
+          <p>No. Products</p>
+          <p>{{ order.orderItems.length }} books</p>
+        </div>
+        <div class="pt-1 d-flex justify-content-between os-total">
+          <p>Total:</p>
+          <p>{{ order.totalAmount | currency }}</p>
+        </div>
+
+        <div class="order-mat-chip mt-4 chip-summary">
+          <mat-chip>
+            <mat-icon>credit_score</mat-icon>
+            <span class="txt-chip">Paid purchase order</span>
+          </mat-chip>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
