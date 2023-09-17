@@ -14,7 +14,7 @@ export class AdminLayoutComponent {
     { label: 'Home', icon: 'home', url: '/' },
     { label: 'Books', icon: 'library_books', url: '/admin/books' },
     { label: 'Orders', icon: 'confirmation_number', url: '/admin/orders' },
-    { label: 'Users', icon: 'supervisor_account', url: '/admin/new' },
+    { label: 'Users', icon: 'supervisor_account', url: '/admin/users' },
   ];
 
   constructor(
