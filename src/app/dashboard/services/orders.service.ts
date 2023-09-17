@@ -4,12 +4,13 @@ import { Observable, catchError, throwError } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { PurchaseOrder } from 'src/app/shared/interfaces';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrdersService {
-  private readonly baseUrl: string = 'http://localhost:3000/api/v1';
+  private readonly baseUrl: string = environment.baseUrl;
 
   private http = inject(HttpClient);
   private authService = inject(AuthService);

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 import { LocalStorageEnum, User } from 'src/app/shared/interfaces';
+import { environment } from 'src/environments/environment';
 import {
   AuthStatus,
   LoginCredentials,
@@ -15,7 +16,7 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly baseUrl: string = 'http://localhost:3000/api/v1';
+  private readonly baseUrl: string = environment.baseUrl;
   private _currentUser?: User;
   private _authStatus: AuthStatus = AuthStatus.checking;
 

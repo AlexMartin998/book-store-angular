@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
 import {
   Book,
   BookPage,
@@ -13,7 +14,7 @@ import {
   providedIn: 'root',
 })
 export class BooksService {
-  private readonly baseUrl: string = 'http://localhost:3000/api/v1';
+  private readonly baseUrl: string = environment.baseUrl;
 
   private http = inject(HttpClient);
 

@@ -6,6 +6,7 @@
 /out-tsc
 /bazel-out
 notes*md
+.env
 
 # Node
 /node_modules

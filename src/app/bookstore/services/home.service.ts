@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 
 import { Book, BookPage } from 'src/app/shared/interfaces';
+import { environment } from 'src/environments/environment';
 import { PaymentOrderResponse } from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeService {
-  private readonly baseUrl: string = 'http://localhost:3000/api/v1';
+  private readonly baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -20,14 +21,14 @@ export class HomeService {
   findAll(size: number = 10, page: number = 0): Observable<BookPage> {
     const params = new HttpParams().set('page', page).set('size', size);
 
-    return this.http.get<BookPage>(`${this.baseUrl}/home/books`, {
+    return this.http.get<BookPage>(`/${this.baseUrl}/home/books`, {
       params,
     });
   }
 
   findOneBySlug(slug: string): Observable<Book> {
     return this.http
-      .get<Book>(`${this.baseUrl}/home/books/${slug}`)
+      .get<Book>(`/${this.baseUrl}/home/books/${slug}`)
       .pipe(catchError((err) => throwError(() => err?.error?.message)));
   }
 
