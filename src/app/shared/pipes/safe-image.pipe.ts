@@ -9,6 +9,7 @@ export class SafeImagePipe implements PipeTransform {
   transform(imageUrl: string): string {
     if (!imageUrl) return 'assets/no-image.png';
 
-    return `${this.baseUrl}/home/files/${imageUrl}`;
+    // return `${this.baseUrl}/home/files/${imageUrl}`;
+    return imageUrl;
   }
 }

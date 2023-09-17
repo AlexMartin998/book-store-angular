@@ -141,12 +141,13 @@ export class SaveBookPageComponent implements OnInit {
 
   uploadFile(event: any, control: string) {
     const file = event.target.files[0];
+    const maxSize = 1024 * 1024 * 10;
+
+    if (file?.size >= maxSize) return alert('Max SIze');
 
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-
-      console.log(`${file.name} was successfully uploaded`);
 
       this.booksService.uploadFile(formData).subscribe((res) => {
         // set filename as input value
