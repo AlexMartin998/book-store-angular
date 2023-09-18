@@ -11,6 +11,7 @@ import { HomeService } from '../../services/home.service';
 })
 export class HomePageComponent implements OnInit {
   private _books: Book[] = [];
+  public isLoadingBooks: boolean = true;
 
   constructor(
     private readonly homeService: HomeService,
@@ -21,6 +22,7 @@ export class HomePageComponent implements OnInit {
     // books are fetched each time this componets is mounted
     this.homeService.findLatestBooks().subscribe((books) => {
       this._books = books;
+      this.isLoadingBooks = false;
     });
   }
 

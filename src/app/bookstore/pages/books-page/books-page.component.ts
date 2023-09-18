@@ -11,6 +11,7 @@ import { HomeService } from '../../services/home.service';
 export class BooksPageComponent implements OnInit {
   public books: Book[] = [];
   public currentPage: number = 0;
+  public isLoadingBooks: boolean = true;
 
   constructor(private readonly homeService: HomeService) {}
 
@@ -18,6 +19,8 @@ export class BooksPageComponent implements OnInit {
     this.homeService.findAll(6).subscribe(({ books, pageNumber }) => {
       this.books = books;
       this.currentPage = pageNumber;
+      this.isLoadingBooks = false;
+
     });
   }
 
