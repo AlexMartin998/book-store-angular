@@ -9,7 +9,8 @@ export class SafeImagePipe implements PipeTransform {
   transform(imageUrl: string): string {
     if (!imageUrl) return 'assets/no-image.png';
 
-    if (imageUrl.includes('cloudinary')) return imageUrl;
+    if (imageUrl.includes('cloudinary') || imageUrl.includes('https'))
+      return imageUrl;
 
     return `${this.baseUrl}/home/files/${imageUrl}`;
   }

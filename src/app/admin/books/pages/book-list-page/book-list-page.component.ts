@@ -49,6 +49,11 @@ export class BookListPageComponent implements OnInit {
   }
 
   delete(bookId: number) {
+    alert(
+      'Action not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
+    return;
+
     if (!confirm('¿Estás seguro de eliminar este libro?')) return;
 
     this.booksService.delete(bookId).subscribe({

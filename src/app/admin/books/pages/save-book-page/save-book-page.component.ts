@@ -21,6 +21,10 @@ import { BooksService } from '../../services/books.service';
 })
 export class SaveBookPageComponent implements OnInit {
   public categories: Category[] = [];
+  private protectedBooks: number[] = Array.from(
+    { length: 12 },
+    (_, index) => index + 1
+  );
 
   public bookForm: FormGroup = this.fb.group({
     id: [''],
@@ -107,6 +111,13 @@ export class SaveBookPageComponent implements OnInit {
 
     // update
     if (this.currentBook?.id) {
+      if (this.protectedBooks.includes(this.currentBook.id)) {
+        alert(
+          'These books are protected and cannot be edited. To see this functionality use the book titled `EDTI` or download the repository and build the app locally with Docker.'
+        );
+        return;
+      }
+
       return this.booksService.update(this.currentBook).subscribe((hero) => {
         // show snackbar
         this.showSnackbar(`${this.currentBook.title} updated`);
@@ -144,6 +155,11 @@ export class SaveBookPageComponent implements OnInit {
     const maxSize = 1024 * 1024 * 10;
 
     if (file?.size >= maxSize) return alert('Max SIze');
+
+    alert(
+      'Uploads are not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
+    return null as any;
 
     if (file) {
       const formData = new FormData();

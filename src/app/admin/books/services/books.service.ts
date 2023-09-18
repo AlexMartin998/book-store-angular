@@ -51,6 +51,11 @@ export class BooksService {
   }
 
   uploadFile(formData: FormData): Observable<FileResponse> {
+    alert(
+      'Uploads are not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
+    return null as any;
+
     return this.http.post<FileResponse>(
       `${this.baseUrl}/media/upload`,
       formData
@@ -58,6 +63,11 @@ export class BooksService {
   }
 
   uploadFileCloudinary(formData: FormData): Observable<FileResponse> {
+    alert(
+      'Uploads are not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
+    return null as any;
+
     return this.http.post<FileResponse>(
       `${this.baseUrl}/media/upload-cloudinary`,
       formData
@@ -65,6 +75,11 @@ export class BooksService {
   }
 
   delete(bookId: number): Observable<boolean> {
+    alert(
+      'Action not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
+    return null as any;
+
     return this.http
       .delete<boolean>(`${this.baseUrl}/books/${bookId}`)
       .pipe(catchError((err) => throwError(() => err?.error?.message)));
