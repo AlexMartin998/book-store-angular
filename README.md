@@ -1,27 +1,49 @@
-# Client
+# Book | Shop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.7.
+This project was generated with Angular CLI version 16.1.7.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+⚡️ Angular 16\
+⚡️ Spring Boot 3.0.10\
+⚡️ Spring Security | JWT\
+⚡️ PostgreSQL\
+⚡ Docker
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### .env
 
-## Build
+Create `.env` file based on `.env.template`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Run the development server with Docker 🐳 :
 
-## Running unit tests
+```bash
+# run docker contaniers
+docker compose up --build
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+# stop and remove containers & networks
+docker compose down -v
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
 
-## Further help
+## View demo
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To see the real-time behavior you can log in with:
+
+- Admin: `alex1@demo.com` and password `123qwe123QWE.`
+- User: `alex2@demo.com` and password `123qwe123QWE.`
+
+<a href="https://alx-storebook-angular-spring.netlify.app" target="_blank">Demo</a>
+
+### Screenshots
+
+![Home](.screenshots/home.png)
+
+
+|                                                          |                                                                       |
+| :------------------------------------------------------: | :-------------------------------------------------------------------: |
+|    <img width="1604" src=".screenshots/bookdetails.png">     |            <img width="1604" src=".screenshots/bookspage.png">             |
+| <img width="1604" src=".screenshots/cart.png"> |          <img width="1604" src=".screenshots/admin-books.png">          |
+| <img width="1604" src=".screenshots/admin-savebook.png"> | <img width="1604" src=".screenshots/admin-orders.png"> |
