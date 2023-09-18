@@ -37,6 +37,11 @@ export class OrdersService {
     orderId: number,
     itemId: number
   ): Observable<any> {
+    alert(
+      'Downloads are not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
+    return null as any;
+
     return this.http.get(
       `${this.baseUrl}/orders/${orderId}/items/${itemId}/books/download`,
       {

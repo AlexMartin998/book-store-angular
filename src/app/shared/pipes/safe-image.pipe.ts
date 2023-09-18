@@ -1,10 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+import { environment } from 'src/environments/environment';
+
 @Pipe({
   name: 'safeImage',
 })
 export class SafeImagePipe implements PipeTransform {
-  private readonly baseUrl: string = 'http://localhost:3000/api/v1';
+  private readonly baseUrl: string = environment.baseUrl;
 
   transform(imageUrl: string): string {
     if (!imageUrl) return 'assets/no-image.png';

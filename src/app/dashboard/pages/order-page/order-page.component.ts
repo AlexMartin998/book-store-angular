@@ -43,6 +43,11 @@ export class OrderPageComponent implements OnInit {
   onDownload(orderItem: OrderItem) {
     if (orderItem.downloadsAvailable <= 0) return;
 
+    alert(
+      'Downloads are not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
+    return null as any;
+
     this.ordersService
       .downloadBookBasedOnOrderItem(this.order.id, orderItem.id)
       .subscribe((blob) => {

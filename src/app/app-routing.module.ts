@@ -35,8 +35,6 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
 
-  // http://localhost:4200/orders/35
-
   { path: '**', redirectTo: '/' },
 ];
 
