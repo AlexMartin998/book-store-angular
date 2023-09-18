@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run envs && ng serve",
-    "build": "npm run envs && ng build",
+    "build": "npm run envs && ng build && npm run redirect:netlify",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "envs": "node ./scripts/set-envs.js"
+    "envs": "node ./scripts/set-envs.js",
+    "redirect:netlify": "node ./scripts/set-redirect.js"
   },
   "private": true,
   "dependencies": {
