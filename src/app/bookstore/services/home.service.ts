@@ -21,14 +21,14 @@ export class HomeService {
   findAll(size: number = 10, page: number = 0): Observable<BookPage> {
     const params = new HttpParams().set('page', page).set('size', size);
 
-    return this.http.get<BookPage>(`/${this.baseUrl}/home/books`, {
+    return this.http.get<BookPage>(`${this.baseUrl}/home/books`, {
       params,
     });
   }
 
   findOneBySlug(slug: string): Observable<Book> {
     return this.http
-      .get<Book>(`/${this.baseUrl}/home/books/${slug}`)
+      .get<Book>(`${this.baseUrl}/home/books/${slug}`)
       .pipe(catchError((err) => throwError(() => err?.error?.message)));
   }
 

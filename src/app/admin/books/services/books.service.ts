@@ -52,6 +52,13 @@ export class BooksService {
 
   uploadFile(formData: FormData): Observable<FileResponse> {
     return this.http.post<FileResponse>(
+      `${this.baseUrl}/media/upload`,
+      formData
+    );
+  }
+
+  uploadFileCloudinary(formData: FormData): Observable<FileResponse> {
+    return this.http.post<FileResponse>(
       `${this.baseUrl}/media/upload-cloudinary`,
       formData
     );
