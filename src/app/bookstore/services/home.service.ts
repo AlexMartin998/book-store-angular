@@ -34,10 +34,12 @@ export class HomeService {
 
   // // PayPal
   createPaymentOrder(bookIds: number[]): Observable<PaymentOrderResponse> {
+    const basePath = location.origin;
+
     const body = {
       bookIds,
-      successUrl: 'http://localhost:4200/cart',
-      cancelUrl: 'http://localhost:4200',
+      successUrl: `${basePath}/cart`,
+      cancelUrl: basePath,
     };
 
     return this.http.post<PaymentOrderResponse>(
