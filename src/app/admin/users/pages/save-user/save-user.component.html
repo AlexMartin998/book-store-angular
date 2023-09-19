@@ -1,0 +1,101 @@
+<h1 class="mb-5">{{ currentUser.id ? "Update" : "New" }} User</h1>
+
+<div class="row">
+  <div class="col-12 col-sm-8">
+    <div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="mb-1 w-100">
+          <!-- First name -->
+          <mat-label>First name</mat-label>
+          <input matInput type="text" formControlName="firstname" />
+          <mat-error>
+            <span
+              inputError
+              inputName="First name"
+              [errors]="form.get('firstname')?.errors"
+            ></span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Last name -->
+        <mat-form-field appearance="outline" class="mb-1 w-100">
+          <mat-label>Last name</mat-label>
+          <input matInput type="text" formControlName="lastname" />
+          <mat-error>
+            <span
+              inputError
+              inputName="Last name"
+              [errors]="form.get('lastname')?.errors"
+            ></span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- email -->
+        <mat-form-field appearance="outline" class="mb-1 w-100">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          <mat-error>
+            <span
+              inputError
+              inputName="Email"
+              [errors]="form.get('email')?.errors"
+            ></span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- password -->
+        <mat-form-field appearance="outline" class="mb-1 w-100">
+          <mat-label>Password</mat-label>
+          <input matInput type="text" formControlName="password" />
+          <mat-error>
+            <span
+              inputError
+              inputName="Password"
+              [errors]="form.get('password')?.errors"
+            ></span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Category -->
+        <mat-form-field appearance="outline" class="col-12 mb-3">
+          <mat-label>Role</mat-label>
+          <mat-select required formControlName="roleId">
+            <mat-option *ngFor="let role of roles" [value]="role.id"
+              >{{ role.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            ><span
+              inputError
+              inputName="Role"
+              [errors]="form.get('roleId')?.errors"
+            ></span
+          ></mat-error>
+        </mat-form-field>
+      </form>
+
+      <!-- Action buttons -->
+      <div class="text-end mt-5">
+        <button mat-button routerLink="/admin/users">Cancel</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onSubmit()"
+          class="ms-2"
+        >
+          {{ currentUser.id ? "Update" : "New" }} Book
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-4">
+    <div>
+      <img
+        [src]="'' | safeImage"
+        [alt]="currentUser.firstname"
+        class="w-100 h-100 book-image"
+      />
+    </div>
+  </div>
+</div>

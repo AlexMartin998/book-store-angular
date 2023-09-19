@@ -5,6 +5,7 @@ export interface User {
   email: string;
   deleted: boolean;
   role: Role;
+  password?: string;
 }
 
 export interface Role {
