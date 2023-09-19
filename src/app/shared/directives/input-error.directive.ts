@@ -48,6 +48,10 @@ export class InputErrorDirective {
       return this.setErrorMessage('Invalid eamil format');
     if (errors.includes('slugNotAvailable'))
       return this.setErrorMessage('Slug already taken');
+    if (errors.includes('passwordPattern'))
+      return this.setErrorMessage(
+        'Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one digit, and one special character.'
+      );
   }
 
   private setErrorMessage(errorMessage: string) {

@@ -25,8 +25,15 @@ export class SaveUserComponent implements OnInit {
       '',
       [Validators.required, Validators.minLength(2), Validators.maxLength(21)],
     ],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: [
+      '',
+      [
+        Validators.pattern(
+          '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.])[A-Za-z\\d@$!%*?&.]{8,}$'
+        ),
+      ],
+    ],
     roleId: ['', [Validators.required, Validators.min(1)]], // select
   });
 
@@ -72,6 +79,12 @@ export class SaveUserComponent implements OnInit {
   }
 
   onSubmit() {
+    const password = this.form.get('password');
+    if (!password?.value) {
+      password?.setErrors({ passwordPattern: true });
+      password?.markAsTouched();
+    }
+
     if (this.form.invalid) return this.form.markAllAsTouched();
 
     if (this.currentUser?.id) {
