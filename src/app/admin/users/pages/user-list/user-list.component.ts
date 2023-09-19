@@ -40,6 +40,8 @@ export class UserListComponent implements OnInit {
   }
 
   delete(id: number) {
-    //
+    return alert(
+      'This action is not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+    );
   }
 }

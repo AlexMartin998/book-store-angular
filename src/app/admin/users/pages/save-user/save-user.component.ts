@@ -74,6 +74,12 @@ export class SaveUserComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return this.form.markAllAsTouched();
 
+    const protectedUsers = [1, 2, 3];
+    if (protectedUsers.includes(this.currentUser.id))
+      return alert(
+        'This action is not allowed in this Demo, to view it please clone the repository and build the project with docker.'
+      );
+
     if (this.currentUser?.id) {
       return this.usersService
         .update({ ...this.currentUser })
