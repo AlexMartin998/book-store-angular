@@ -6,8 +6,6 @@
 
 <h1>Purchase Orders</h1>
 
-<!-- <pre>{{orderPage?.orders | json}}</pre> -->
-
 <div *ngIf="orderPage?.orders; else loading" class="orders-table mt-4">
   <table mat-table [dataSource]="orderPage!.orders">
     <!-- ID -->
