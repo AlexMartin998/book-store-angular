@@ -34,6 +34,16 @@ export class UsersService {
   }
 
   update(user: User): Observable<User> {
-    return this.http.patch<User>(`${this.baseUrl}/users/${user.id}`, user);
+    return this.http.patch<User>(`${this.baseUrl}/users/${user.id}`, user).pipe(
+      catchError((err) =>
+        throwError(() => {
+          if (err.error.errors instanceof Array) {
+            return err.error.errors;
+          }
+
+          return err?.error?.message;
+        })
+      )
+    );
   }
 }

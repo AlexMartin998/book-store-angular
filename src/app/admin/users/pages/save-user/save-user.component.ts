@@ -25,8 +25,15 @@ export class SaveUserComponent implements OnInit {
       '',
       [Validators.required, Validators.minLength(2), Validators.maxLength(21)],
     ],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: [
+      '',
+      [
+        Validators.pattern(
+          '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.])[A-Za-z\\d@$!%*?&.]{8,}$'
+        ),
+      ],
+    ],
     roleId: ['', [Validators.required, Validators.min(1)]], // select
   });
 
@@ -61,7 +68,7 @@ export class SaveUserComponent implements OnInit {
           this.form.reset(user);
         },
         error: (errorMessage) => {
-          console.log(errorMessage);
+          this.showSnackbar(errorMessage);
           return this.router.navigateByUrl('/admin/users');
         },
       });
@@ -72,6 +79,12 @@ export class SaveUserComponent implements OnInit {
   }
 
   onSubmit() {
+    const password = this.form.get('password');
+    if (!password?.value) {
+      password?.setErrors({ passwordPattern: true });
+      password?.markAsTouched();
+    }
+
     if (this.form.invalid) return this.form.markAllAsTouched();
 
     const protectedUsers = [1, 2, 3];
@@ -81,14 +94,18 @@ export class SaveUserComponent implements OnInit {
       );
 
     if (this.currentUser?.id) {
-      return this.usersService
-        .update({ ...this.currentUser })
-        .subscribe((user) => {
+      return this.usersService.update({ ...this.currentUser }).subscribe({
+        next: (user) => {
           // show snackbar
           this.showSnackbar(`${this.currentUser.firstname} updated`);
 
           this.router.navigateByUrl('/admin/users');
-        });
+        },
+        error: (errorMessage) => {
+          this.showSnackbar(errorMessage);
+          return this.router.navigateByUrl('/admin/users');
+        },
+      });
     }
 
     this.usersService.create(this.currentUser).subscribe((user) => {
@@ -102,7 +119,20 @@ export class SaveUserComponent implements OnInit {
     return;
   }
 
-  private showSnackbar(message: string): void {
+  private showSnackbar(message: string | string[]): void {
+    if (message instanceof Array) {
+      message.forEach((errorMessage) => {
+        this.snackbar.open(errorMessage, 'done', {
+          duration: 3600,
+          panelClass: ['redNoMatch'],
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
+        });
+      });
+
+      return;
+    }
+
     this.snackbar.open(message, 'done', {
       duration: 2700,
       panelClass: ['redNoMatch'],
