@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run envs && ng serve",
-    "build": "npm run envs && ng build && npm run redirect:netlify",
+    "build": "npm run envs && ng build",
+    "build:netlify": "npm run envs && ng build && npm run redirect:netlify",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "envs": "node ./scripts/set-envs.js",

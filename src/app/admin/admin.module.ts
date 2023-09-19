@@ -5,12 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
+
 import { BookListPageComponent } from './books/pages/book-list-page/book-list-page.component';
 import { SaveBookPageComponent } from './books/pages/save-book-page/save-book-page.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { OrderListComponent } from './orders/pages/order-list/order-list.component';
 import { OrderPageComponent } from './orders/pages/order-page/order-page.component';
 import { UserListComponent } from './users/pages/user-list/user-list.component';
+import { UserPageComponent } from './users/pages/user-page/user-page.component';
+import { SaveUserComponent } from './users/pages/save-user/save-user.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,8 @@ import { UserListComponent } from './users/pages/user-list/user-list.component';
     OrderListComponent,
     OrderPageComponent,
     UserListComponent,
+    UserPageComponent,
+    SaveUserComponent,
   ],
   imports: [
     CommonModule,
